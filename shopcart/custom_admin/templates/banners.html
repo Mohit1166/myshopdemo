@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    {% include 'header.html' %}
+</head>
+
+<body>
+    <!-- <form method="POST" class="post-form">   -->
+    <div style="margin: 350px; position: relative; bottom: 260px;left: 150px;">
+        <form action="{% url 'custom_admin:bannersform' %}">
+            <button type="submit" class="btn btn-block btn-danger">Add</button>
+        </form>
+        <!-- <div style="display: flex; justify-content: flex-end;"></div> -->
+        <table class="table table-bordered tables-hover">
+            <thead>
+                <tr>
+
+                    <th>Path</th>
+                    <th>Status</th>
+                    <th>Images</th>
+                    <!-- <th>Images</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in obj %}
+                <tr>
+
+                    <td>{{i.banner_path}}</td>
+                    <td>{{i.status_bit}}</td>
+                    {% if i.banner_path %}
+                      <td>
+                           <img src="{{ i.banner_path.url }}" alt="" height="50px";width= "50px" >
+                      </td>
+                      {% else %}
+                         <td>
+                             <img src=" /shopcart/media/Product_Images "alt="" height="50px";width= "50px">
+                         </td>
+                 
+                     {% endif %}
+                   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+{% include 'footer.html' %}
+
+</html>
