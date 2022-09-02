@@ -3,6 +3,7 @@ from django.contrib import admin
 from django import views
 from django.urls import path,include
 from custom_admin import views
+from django.contrib.auth.decorators import login_required,permission_required
 from django.contrib.auth import views as auth_views
 from django.conf import settings  
 from django.conf.urls.static import static
@@ -13,7 +14,9 @@ urlpatterns = [
     path("check/",views.check),
     path("logout/", views.admin_logout,name="logout"),
     path("banners/",views.banners_check ,name="banners"),
-    path("bannersform/",views.banners_index.as_view(),name="bannersform"),
+    path("bannersform/",login_required(views.Banners_index.as_view()),name="bannersform"),
+    path("Delete/",views.Delete.as_view(),name="Delete"),
+    path("Edit/<int:id>/" ,views.Edit.as_view(),name="Edit")
     # path("bannersclick/",views.banners_click)
 ]
 if settings.DEBUG:

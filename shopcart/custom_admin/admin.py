@@ -15,7 +15,7 @@ admin.site.register(Cms,Cms_admin)
 
 
 class banners_admin(admin.ModelAdmin):
-    list_display=("banner_path","status_bit")
+    list_display=("Name","banner_path","status_bit")
 admin.site.register(Banners,banners_admin)
 
 class Email_admin(admin.ModelAdmin):

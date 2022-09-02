@@ -1,13 +1,16 @@
 
+from statistics import fmean
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from custom_admin.forms import *
 from .models import Banners
+from django.utils.decorators import method_decorator
 # from custom_admin.models import Banners
 
 # from shopcart.custom_admin.forms import BannersForm
@@ -37,7 +40,7 @@ def adminlogin(request):
                   messages.error(request,"Check out some error")
       return render(request,"login.html")
 
-@login_required(login_url='adminpanel/adminlogin', redirect_field_name='admin_login')
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='admin_login')
 def start(request):
       return render(request,"starter.html")
 
@@ -52,11 +55,17 @@ def admin_logout(request):
 #       return render(request,"banners_click.html",{'form':obj})
 
 
-class banners_index(View):
+class Banners_index(View):
+
+      # login_url = '/adminpanel/adminlogin'
+      # redirect_field_name = 'admin_login'
+
+      # @method_decorator(login_required)
       def get(self,request):
             obj=bannersForm()
             return render(request,"banners_click.html",{'form':obj})
 
+      # @method_decorator(login_required)
       def post(self,request):
             obj=bannersForm(request.POST,request.FILES)
             if obj.is_valid():
@@ -77,25 +86,23 @@ def check(request):
 #       check=Banners.objects.all()
 #       return render(request,"banners.html",{'object':check})
 
-# @login_required(login_url='adminpanel/adminlogin', redirect_field_name='admin_login')
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def banners_check(request):
       obj=Banners.objects.all()
       keys={"obj":obj}
       return render(request,"banners.html",keys)
 
-# def banners_click(request):
-#       if request.method=="POST":
-#             form=Banners()
-#             if len(request.FILES)!=0:
-#                   form.banner_path=request.FILES["image"]
-#             form.save()
-#             return redirect("/")
-#       return render (request,"banners_click.html")
+class Delete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=Banners.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:banners')
 
-# def banner_image(request):
-#       if request=="POST":
-#             form=bannersForm(request.POST,request.FILES)
+class Edit(View):
+      def get (self,request,id):
+            obj=Banners.objects.get(id=id)
+            fm=bannersForm(instance=obj)
+            return render(request,"banners_click.html",{'form':fm})
 
-#             if form.is_valid():
-#                   form.save()
-#                   return redirect("custom_admin:start")

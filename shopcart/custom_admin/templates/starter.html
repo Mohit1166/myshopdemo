@@ -30,10 +30,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <!-- <a href="index3.html" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="#" class="nav-link">Contact</a> -->
+            
         </li>
       </ul>
 
@@ -41,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
         <li class="nav-item">
-          <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <!-- <a class="nav-link" data-widget="navbar-search" href="#" role="button">
             <i class="fas fa-search"></i>
           </a>
           <div class="navbar-search-block">
@@ -59,18 +60,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </form>
           </div>
-        </li>
+        </li> -->
 
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
               <!-- Message Start -->
-              <div class="media">
+              <!-- <div class="media">
                 <img src="/static/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
@@ -80,13 +81,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p class="text-sm">Call me whenever you can...</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
+              </div> -->
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
+              <form action="{% url 'custom_admin:logout' %}">
+                <button  type="submit" class="btn btn-success " >Sign-out</button>
+            </form>
               <!-- Message Start -->
-              <div class="media">
+              <!-- <div class="media">
                 <img src="/static/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
@@ -96,13 +100,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p class="text-sm">I got your message bro</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
-              <!-- Message End -->
+              </div> --> 
+              <!-- Message End
             </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
-              <!-- Message Start -->
-              <div class="media">
+               Message Start -->
+              <!-- <div class="media">
                 <img src="/static/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
@@ -112,15 +116,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p class="text-sm">The subject goes here</p>
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-              </div>
+              </div> -->
               <!-- Message End -->
             </a>
-            <div class="dropdown-divider"></div>
+            <!-- <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-          </div>
+          </div> -->
         </li>
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
             <span class="badge badge-warning navbar-badge">15</span>
@@ -156,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <i class="fas fa-th-large"></i>
           </a>
         </li>
-      </ul>
+      </ul> -->
     </nav>
     <!-- /.navbar -->
 
@@ -164,9 +168,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <!-- <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8"> -->
+        <span class="brand-text font-weight-light">Custom Admin</span>
       </a>
 
       <!-- Sidebar -->
@@ -181,8 +185,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         </div>
 
-        <!-- SidebarSearch Form -->
-        <!-- <div class="form-inline">
+        
+        <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -191,15 +195,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </button>
             </div>
           </div>
-        </div> -->
+        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+              
             <li class="nav-item menu-open">
               <a href="#" class="nav-link active">
+                
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   <!-- Starter Pages -->
@@ -208,31 +214,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
+                  <!-- <a href="#" class="nav-link active"> -->
+                    <!-- <i class="far fa-circle nav-icon"></i> -->
+                    <button  style="background-color: greenyellow; width: 240px; "><a style="color: white;" href ={% url 'custom_admin:banners' %} > Banners</a></button>
                     <!-- <p>Active Page</p> -->
                   </a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <!-- <p>Inactive Page</p> -->
-                  <!-- </a>
+                <!-- <!-- <li class="nav-item">
+                  <a href="#" class="nav-link"> -->
+                    <!-- <i class="far fa-circle nav-icon"></i> --> 
+                    <!-- <p>Inactive Page</p> 
+                  </a>
                 </li>
               </ul>
             </li> -->
-            <!-- <li class="nav-item">
+             <!-- <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-th"></i> -->
                 <p>
                  
-                  <span class="right badge badge-danger">New</span>
+                  <!-- <span class="right badge badge-danger">New</span> -->
                </p>
               </a>
 
             </li>
           </ul>
-        </nav> --> -->
+        </nav> 
 
         <!-- /.sidebar-menu -->
       </div>
@@ -241,7 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <button type="submit" class="btn btn-success ">Sign-out</button>
       </form>  -->
       <br>
-      <a href ={% url 'custom_admin:banners' %}> Click here for Banners</a>
+      
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
@@ -257,9 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <ol class="breadcrumb float-sm-right">
                 <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Starter Page</li> -->
-                <form action="{% url 'custom_admin:logout' %}">
-                  <button type="submit" class="btn btn-success ">Sign-out</button>
-              </form>
+              
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -285,7 +290,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a href="#" class="card-link">Another link</a>
                 </div>
               </div> -->
-
+<!-- 
               <!-- <div class="card card-primary card-outline">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
