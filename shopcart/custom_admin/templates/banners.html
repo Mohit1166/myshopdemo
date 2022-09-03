@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <!-- {% include 'header.html' %} -->
+    {% include 'header.html' %}
 </head>
 
 <body>
     <!-- <form method="POST" class="post-form">   -->
     <div style="margin: 350px; position: relative; bottom: 260px;left: 150px;">
         <form action="{% url 'custom_admin:bannersform' %}">
-            <button type="submit" class="btn btn-block btn-danger">Add</button>
+            <button type="submit" class="btn btn-sm btn-danger" style="float: right; width: 150px;">Add</button>
         </form>
         <!-- <div style="display: flex; justify-content: flex-end;"></div> -->
         <table class="table table-bordered tables-hover">
@@ -22,7 +22,7 @@
                     <th>Status</th>
                     <th>Images</th>
                     <th>Action</th>
-                    <th>Action</th>
+                   
                     <!-- <th>Images</th> -->
                 </tr>
             </thead>
@@ -44,18 +44,20 @@
                      {% endif %}
                      <td>
                          <form action="{% url 'custom_admin:Delete' %}" method="POST">
+
                          {% csrf_token %}
+
                              <input type="hidden" name="id" value={{i.id}}>
-                             <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                             <input type="submit" value="Delete" class="btn btn-danger btn-sm " >
+                             <a href="{% url 'custom_admin:Edit' i.id %}" class="btn btn-primary btn-sm fas fa-edit"></a>
+                             
                          </form>
                      </td>
 
-                     <td>
-                         <form action="{% url 'custom_admin:banners' %}" method="POST">
-                         {% csrf_token %}
-                         <input type="submit" value="Edit" class="btn btn-primary btn-sm">
-                         </form>
-                     </td>
+                     <!-- <td>
+                         <a href="{% url 'custom_admin:Edit' i.id %}" class="btn btn-primary btn-sm"> Edit</a>
+                       
+                     </td> -->
                    
                 </tr>
                 {% endfor %}

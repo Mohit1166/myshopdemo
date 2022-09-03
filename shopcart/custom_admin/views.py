@@ -104,5 +104,12 @@ class Edit(View):
       def get (self,request,id):
             obj=Banners.objects.get(id=id)
             fm=bannersForm(instance=obj)
-            return render(request,"banners_click.html",{'form':fm})
+            return render(request,"edit.html",{'form':fm})
+
+      def post(self,request, id):
+        ban = Banners.objects.get(id=id)
+        fm = bannersForm(request.POST,request.FILES,instance=ban)
+        if fm.is_valid():
+            fm.save()
+            return redirect('custom_admin:banners')
 
