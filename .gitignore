@@ -1,5 +1,6 @@
 djangoenv
 __pycache__/
 db.sqlite3
-.vscode/*
-!.vscode/settings.json
+
+.vscode/
+settings.json
