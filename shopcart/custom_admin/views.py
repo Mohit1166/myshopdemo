@@ -13,11 +13,6 @@ from .models import Banners
 from django.utils.decorators import method_decorator
 # from custom_admin.models import Banners
 
-# from shopcart.custom_admin.forms import BannersForm
-# Create your views here.
-# @login_required(login_url='adminpanel/adminlogin', redirect_field_name='adminlogin')
-# def start(request):
-#       return render(request,"starter.html")
 
 
 def adminlogin(request):
@@ -55,7 +50,7 @@ def admin_logout(request):
 #       return render(request,"banners_click.html",{'form':obj})
 
 
-class Banners_index(View):
+class BannersIndex(View):
 
       # login_url = '/adminpanel/adminlogin'
       # redirect_field_name = 'admin_login'
@@ -87,11 +82,12 @@ def check(request):
 #       return render(request,"banners.html",{'object':check})
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
-def banners_check(request):
+def bannerscheck(request):
       obj=Banners.objects.all()
       keys={"obj":obj}
       return render(request,"banners.html",keys)
-
+      
+#For banner Delete
 class Delete(View):
       def post(self,request):
             data=request.POST
@@ -99,7 +95,7 @@ class Delete(View):
             fm=Banners.objects.get(id=id)
             fm.delete()
             return redirect('custom_admin:banners')
-
+#For banner Edit
 class Edit(View):
       def get (self,request,id):
             obj=Banners.objects.get(id=id)
