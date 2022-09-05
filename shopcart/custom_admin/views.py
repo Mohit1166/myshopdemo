@@ -62,12 +62,12 @@ class Banners_index(View):
 
       # @method_decorator(login_required)
       def get(self,request):
-            obj=bannersForm()
+            obj=BannersForm()
             return render(request,"banners_click.html",{'form':obj})
 
       # @method_decorator(login_required)
       def post(self,request):
-            obj=bannersForm(request.POST,request.FILES)
+            obj=BannersForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -103,12 +103,12 @@ class Delete(View):
 class Edit(View):
       def get (self,request,id):
             obj=Banners.objects.get(id=id)
-            fm=bannersForm(instance=obj)
+            fm=BannersForm(instance=obj)
             return render(request,"edit.html",{'form':fm})
 
       def post(self,request, id):
         ban = Banners.objects.get(id=id)
-        fm = bannersForm(request.POST,request.FILES,instance=ban)
+        fm = BannersForm(request.POST,request.FILES,instance=ban)
         if fm.is_valid():
             fm.save()
             return redirect('custom_admin:banners')
