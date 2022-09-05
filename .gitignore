@@ -1,5 +1,6 @@
 djangoenv
 __pycache__/
+media
 db.sqlite3
 # !**/migrations/__init__.py
 .vscode/
