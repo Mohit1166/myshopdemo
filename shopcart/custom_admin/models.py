@@ -32,7 +32,7 @@ class Cms(models.Model):
 
 
 class Banners(models.Model):
-     Name=models.CharField(max_length=50)
+     Name=models.CharField(max_length=50, unique=True)
      banner_path=models.ImageField(blank=True, upload_to='Product_Images')
      status_bit=models.BooleanField()
      class Meta:
