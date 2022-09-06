@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <form action="{% url 'custom_admin:bannersform' %}">
-                            <button type="submit" class="btn btn-sm btn-danger"
+                            <button type="submit" class="btn btn-sm btn-primary"
                                 style="float: right; width: 150px;">Add</button>
                         </form>
                         <!-- <div style="display: flex; justify-content: flex-end;"></div> -->
@@ -40,15 +40,52 @@
                                     </td>
 
                                     {% endif %}
-                                    <td>
-                                        <form action="{% url 'custom_admin:Delete' %}" method="POST">
+                                   <td>
+                                        <!-- <form action="{% url 'custom_admin:Delete' %}" method="POST"> -->
 
-                                            {% csrf_token %}
+                                        <!-- {% csrf_token %} -->
 
-                                            <input type="hidden" name="id" value={{i.id}}>
-                                            <input type="submit" value="Delete" class="btn btn-danger btn-sm  ">
-                                            <a href="{% url 'custom_admin:Edit' i.id %}"
-                                                class="btn btn-primary btn-sm fas fa-edit"></a>
+                                        <!-- <input type="hidden" name="id" value={{i.id}}> -->
+                                        <!-- <input type="submit" value="Delete" class="btn btn-danger btn-sm "
+                                                onclick="return confirm('Are you sure ?')"> -->
+
+                                        <button type="submit" value="Delete" class="btn btn-default btn-sm"
+                                            data-toggle="modal" data-target="#deletemodal">
+                                            Delete
+                                        </button>
+
+                                        <div class="modal fade" id="deletemodal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <!-- <h4 class="modal-title">User You are Deleting Something</h4> -->
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <form action="{% url 'custom_admin:Delete' %}" method="POST">
+                                                        {% csrf_token %}
+
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="id" value={{i.id}}>
+                                                            <h4> Are you Sure You Want To Delete ??</h4>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary">Yes Delete
+                                                                it!!
+                                                            </button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <a href="{% url 'custom_admin:Edit' i.id %}"
+                                            class="btn btn-default btn-sm fas fa-edit"></a>
 
                                         </form>
 
@@ -65,5 +102,5 @@
             </div>
         </div>
     </section>
-</div>
+</div> 
 {% endblock %}
