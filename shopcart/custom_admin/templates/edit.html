@@ -1,22 +1,44 @@
+
 {% extends 'starter.html' %}
 {% block content %}
-<div class="content-wrapper">
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div style="margin: 350px;position: relative; bottom: 260px; right: 40px;" class="col-sm-8">
-                            <form action="" method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{form.as_p}}
-                                <input type="submit" value="Submit" class="btn btn-primary">
-                            </form>
-                        </div>
+<div align="center">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1><u><i> For Edit </i></u></h1>
                     </div>
                 </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="form-group">
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-6">
+                                    <!-- general form elements -->
+                                    <div class="card card-warning">
+                                        <div class="card-header">
+                                            {{ form.as_p }}
+                                            <div class="card-footer">
+                                                <button type="submit" class="save btn btn-default"
+                                                    value="Submit">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
-    </section>
+        </form>
+    </div>
 </div>
 {% endblock %}
