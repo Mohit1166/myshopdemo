@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="/static/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="/static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="/static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <style>
+
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -59,215 +62,215 @@
           </div>
         </div>
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item menu-open">
-              <a href="#" class="nav-link active">
-                <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
-                <p>
-                  My DashBoard
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{% url 'custom_admin:banners' %}" class="nav-link">
+          <ul class="nav nav-pills" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- <li class="nav-item menu-open"> -->
+            <a href="#" class="nav-link ">
+              <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+              <p>
+                My DashBoard
+                <!-- <i class="right fas fa-angle-left"></i> -->
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="{% if 'Banners' in request.resolver_match.banners %} active {% endif %}">
+                <a href="{% url 'custom_admin:banners' %}" class="nav-link" id="btn">
 
-                    <p>
-                      Banners
+                  <p>
+                    Banners
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link" id="conf">
 
-                    <p>
-                      Configurations
+                  <p>
+                    Configurations
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link" tabindex="1">
 
-                    <p>
-                      CMS
+                  <p>
+                    CMS
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      Email
+                  <p>
+                    Email
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      Contacts
+                  <p>
+                    Contacts
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      Category
+                  <p>
+                    Category
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      Products
+                  <p>
+                    Products
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      ProductsCategory
+                  <p>
+                    ProductsCategory
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      ProductsImages
+                  <p>
+                    ProductsImages
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      ProductAttributes
+                  <p>
+                    ProductAttributes
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      ProductsAttributesValues
+                  <p>
+                    ProductsAttributesValues
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      ProductsAsscos
+                  <p>
+                    ProductsAsscos
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      User
+                  <p>
+                    User
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      UserWishList
+                  <p>
+                    UserWishList
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      UserAddress
+                  <p>
+                    UserAddress
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      Coupons
+                  <p>
+                    Coupons
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      CouponsUsed
+                  <p>
+                    CouponsUsed
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class=" nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                     PaymentGateway
+                  <p>
+                    PaymentGateway
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      OrderDetails
+                  <p>
+                    OrderDetails
 
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
 
-                    <p>
-                      UserOrder
+                  <p>
+                    UserOrder
 
-                    </p>
-                  </a>
-                </li>
+                  </p>
+                </a>
+              </li>
 
 
 
-            </li>
-            <!-- <li class="nav-item">
+              </li>
+              <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inactive Page</p>
                 </a>
               </li> -->
-          </ul>
-          </li>
-          <!-- <li class="nav-item">
+            </ul>
+            </li>
+            <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -280,6 +283,7 @@
         </nav>
       </div>
     </aside>
+
     {% block content %}
 
 
@@ -308,6 +312,21 @@
   <script src="/static/plugins/jquery/jquery.min.js"></script>
   <script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/static/dist/js/adminlte.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    var btn = document.getElementById("btn");
+    btn.addEventListener('click', function onClick(event) {
+      event.target.style.backgroundColor = 'blue';
+
+    });
+
+    var conf = document.getElementById("conf");
+    btn.addEventListener('click', function onClick(event) {
+      event.target.style.backgroundColor = 'blue';
+    });
+
+  </script>
 </body>
 
 </html>
