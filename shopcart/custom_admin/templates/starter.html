@@ -14,7 +14,13 @@
   <link rel="stylesheet" href="/static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="/static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <style>
+    .active {
+      background: rgba(0, 0, 255, 0.192);
+    }
 
+    .inactive {
+      background: rgba(0, 0, 255, 0.192);
+    }
   </style>
 </head>
 
@@ -73,7 +79,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="{% if 'Banners' in request.resolver_match.banners %} active {% endif %}">
-                <a href="{% url 'custom_admin:banners' %}" class="nav-link" id="btn">
+                <a href="{% url 'custom_admin:banners' %}" class="btn inactive">
 
                   <p>
                     Banners
@@ -83,7 +89,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link" id="conf">
+                <a href="#" class="nav-link">
 
                   <p>
                     Configurations
@@ -93,7 +99,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link" tabindex="1">
+                <a href="#" class="nav-link">
 
                   <p>
                     CMS
@@ -314,18 +320,24 @@
   <script src="/static/dist/js/adminlte.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <script>
+  <!-- <script>
     var btn = document.getElementById("btn");
     btn.addEventListener('click', function onClick(event) {
       event.target.style.backgroundColor = 'blue';
 
     });
+    
 
-    var conf = document.getElementById("conf");
-    btn.addEventListener('click', function onClick(event) {
-      event.target.style.backgroundColor = 'blue';
-    });
 
+  </script> -->
+  <script>
+
+    $(document).ready(function () {
+      $('.btn').click(function () {
+        $('.btn').removeClass('active').addClass('inactive');
+        $(this).removeClass('inactive').addClass('active');
+      });
+    })
   </script>
 </body>
 
