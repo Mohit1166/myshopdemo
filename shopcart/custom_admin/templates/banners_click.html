@@ -26,9 +26,9 @@
                 <!-- left column -->
                 <div class="col-md-6">
                     <!-- general form elements -->
-                    <div class="card card-primary">
+                    <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">Banner Form</h3>
+                            <h3 class="card-title" style="position: relative;left: 150px;">Banner's Form</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -36,11 +36,11 @@
                             {% csrf_token %}
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="banner_name">Banner name</label>
+                                    <label for="banner_name">Banner's name</label>
                                     {{ form.Name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="banner_path">Banner Path</label>
+                                    <label for="banner_path">Banner's Path</label>
                                     {{ form.banner_path }}
                                     <!-- <div class="input-group">
                       <div class="custom-file">
