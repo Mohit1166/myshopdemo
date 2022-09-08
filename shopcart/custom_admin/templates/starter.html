@@ -14,13 +14,22 @@
   <link rel="stylesheet" href="/static/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="/static/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <style>
-    .active {
+    /* .active {
       background: rgba(0, 0, 255, 0.192);
     }
 
     .inactive {
       background: rgba(0, 0, 255, 0.192);
+    } */
+    nav li.active a  {
+      background-color: rgba(255, 255, 255, 0.863);
+
+
     }
+
+    /* nav li.bann-show.show {
+      display: block;
+    } */
   </style>
 </head>
 
@@ -78,8 +87,8 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="{% if 'Banners' in request.resolver_match.banners %} active {% endif %}">
-                <a href="{% url 'custom_admin:banners' %}" class="btn inactive">
+              <li class="nav-item">
+                <a href="{% url 'custom_admin:banners' %}" class="nav-link">
 
                   <p>
                     Banners
@@ -332,12 +341,28 @@
   </script> -->
   <script>
 
-    $(document).ready(function () {
-      $('.btn').click(function () {
-        $('.btn').removeClass('active').addClass('inactive');
-        $(this).removeClass('inactive').addClass('active');
-      });
+    // $(document).ready(function () {
+    //   $('.btn').click(function () {
+    //     $('.btn').removeClass('active').addClass('inactive');
+    //     $(this).removeClass('inactive').addClass('active');
+    //   });
+    // })
+
+    // $(document).ready(function () {
+    //   $('.bann-but').click(function(){
+    //     $('nav li.bann-show').toggleClass("show");
+
+
+    //   })
+
+    // })
+
+    $(document).ready(function(){
+      $('nav ul li ').click(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+      })
     })
+
   </script>
 </body>
 
