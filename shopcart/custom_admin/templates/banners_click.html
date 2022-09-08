@@ -69,3 +69,16 @@
 
 
 {% endblock %}
+{% block script %}
+  <script>
+    $(document).ready(function(){
+        setNavBar()
+    });
+
+    // set navebar
+    function setNavBar(){ 
+        $(".nav-link").removeClass("active")
+        $(".banner-menu").addClass("active")
+    }
+</script>
+  {% endblock %}

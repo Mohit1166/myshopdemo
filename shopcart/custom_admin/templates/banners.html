@@ -1,6 +1,6 @@
 {% extends 'starter.html' %}
 {% block content %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -50,7 +50,8 @@
                                                 onclick="return confirm('Are you sure ?')"> -->
 
                                         <button type="submit" value="Delete" class="btn btn-default btn-sm"
-                                            data-toggle="modal" data-target="#deletemodal">
+                                            data-toggle="modal" data-target="#deletemodal"
+                                            style="color: black; background-color: red;">
                                             Delete
                                         </button>
 
@@ -103,4 +104,18 @@
         </div>
     </section>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        setNavBar()
+    });
+
+    // set navebar
+    function setNavBar() {
+        $(".nav-link").removeClass("active")
+        $(".banner-menu").addClass("active")
+    }
+</script>
 {% endblock %}
