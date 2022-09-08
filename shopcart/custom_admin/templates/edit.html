@@ -28,7 +28,7 @@
                     <!-- general form elements -->
                     <div class="card card-success">
                         <div class="card-header ">
-                            <h3 class="card-title" style="position: relative;left: 150px;">Add Banner's </h3>
+                            <h3 class="card-title" style="position: relative;left: 150px;">Edit Banners </h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -70,18 +70,18 @@
 
 {% endblock %}
 {% block script %}
-  <script>
-    $(document).ready(function(){
+<script>
+    $(document).ready(function () {
         setNavBar()
     });
 
     // set navebar
-    function setNavBar(){ 
+    function setNavBar() {
         $(".nav-link").removeClass("active")
         $(".banner-menu").addClass("active")
     }
 </script>
-  {% endblock %}
+{% endblock %}
 </body>
 
 </html>
