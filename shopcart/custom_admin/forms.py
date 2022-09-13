@@ -45,3 +45,63 @@ class ProductImages(forms.ModelForm):
     class Meta:  
         model =ProductsImages
         fields = "__all__"
+
+class ProductAttributes(forms.ModelForm):  
+    class Meta:  
+        model =ProductAttributes
+        fields = "__all__"
+
+class ProductValues(forms.ModelForm):  
+    class Meta:  
+        model =ProductsAttributesValues
+        fields = "__all__"
+
+class ProductsAsscos(forms.ModelForm):  
+    class Meta:  
+        model =ProductsAsscos
+        fields = "__all__"
+
+class User(forms.ModelForm):  
+    class Meta:  
+        model =User
+        fields = "__all__"
+
+class UserWishList(forms.ModelForm):  
+    class Meta:  
+        model =UserWishList
+        fields = "__all__"
+
+class UserAddress(forms.ModelForm):  
+    class Meta:  
+        model =UserAddress
+        fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
+
+# class User(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"

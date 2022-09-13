@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required,permission_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from custom_admin.forms import *
-from .models import Banners,Configuration,Cms,Email,Contacts,Category,Products
+# from .models import Banners,Configuration,Cms,Email,Contacts,Category,Products
+from custom_admin.models import *
 from django.utils.decorators import method_decorator
 # from custom_admin.models import Banners
 
@@ -297,7 +298,7 @@ class ProductImages(View):
      
       def get(self,request):
             obj=ProductImages
-            return render(request,"productcateg.html",{'form':obj})
+            return render(request,"productimg.html",{'form':obj})
 
 
       def post(self,request):
@@ -306,14 +307,178 @@ class ProductImages(View):
                   instance=obj.save()
                   print(instance.banner_path.path)
                  
-                  return redirect('custom_admin:productscategories')
+                  return redirect('custom_admin:productsimages')
             else:
-                  return render(request,"productcateg_form.html",{'form':obj})
+                  return render(request,"productimg_form.html",{'form':obj})
 
 
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
-def productscategorycheck(request):
+def productsimagecheck(request):
       obj=ProductImages.objects.all()
       keys={"obj":obj}
-      return render(request,"productcateg.html",keys)
+      return render(request,"productimg.html",keys)
+
+
+# For Product Attributes
+class ProductAttributes(View):
+     
+      def get(self,request):
+            obj=ProductAttributes
+            return render(request,"attributes.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=ProductAttributes(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:productattribute')
+            else:
+                  return render(request,"attributes_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def attributecheck(request):
+      obj=ProductAttributes.objects.all()
+      keys={"obj":obj}
+      return render(request,"attributes.html",keys)
+
+
+# For Product Attributes Values
+class ProductValues(View):
+     
+      def get(self,request):
+            obj=ProductValues
+            return render(request,"productvalues.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=ProductValues(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:productvalue')
+            else:
+                  return render(request,"productvalues_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def productvaluescheck(request):
+      obj=ProductsAttributesValues.objects.all()
+      keys={"obj":obj}
+      return render(request,"productvalues.html",keys)
+
+
+
+#  For ProductsAsscos
+class ProductsAsscos(View):
+     
+      def get(self,request):
+            obj=ProductsAsscos
+            return render(request,"productasscos.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=ProductsAsscos(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:productasscos')
+            else:
+                  return render(request,"productasscos_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def productasscoscheck(request):
+      obj=ProductsAsscos.objects.all()
+      keys={"obj":obj}
+      return render(request,"productasscos.html",keys)
+
+
+
+
+#  For User
+class User(View):
+     
+      def get(self,request):
+            obj=User
+            return render(request,"user.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=User(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:user')
+            else:
+                  return render(request,"user_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def usercheck(request):
+      obj=User.objects.all()
+      keys={"obj":obj}
+      return render(request,"user.html",keys)
+
+
+#  For UserWishList
+class UserWishList(View):
+     
+      def get(self,request):
+            obj=UserWishList
+            return render(request,"userlist.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=UserWishList(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:userwishlist')
+            else:
+                  return render(request,"userlist_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def userlistcheck(request):
+      obj=UserWishList.objects.all()
+      keys={"obj":obj}
+      return render(request,"userlist.html",keys)
+
+# For UserAddress
+class UserAddress(View):
+     
+      def get(self,request):
+            obj=UserAddress
+            return render(request,"useraddress.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=UserAddress(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:useraddress')
+            else:
+                  return render(request,"useraddress_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def useraddresscheck(request):
+      obj=UserAddress.objects.all()
+      keys={"obj":obj}
+      return render(request,"useraddress.html",keys)

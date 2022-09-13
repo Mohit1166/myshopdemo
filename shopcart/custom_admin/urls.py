@@ -35,6 +35,27 @@ urlpatterns = [
     path("productsforms/",views.productscheck,name="productsform"),
     path("productscateg/",views.ProductCategory.as_view(),name="productscategories"),
     path("productscategforms/",views.productscategorycheck,name="productscategoriesgform"),
+    path("productsimages/",views.ProductImages.as_view(),name="productsimages"),
+    path("productsimagescheck/",views.productsimagecheck,name="productsimagescheck"),
+    path("productattribute/",views.ProductAttributes.as_view(),name="productattribute"),
+    path("productattributecheck/",views.attributecheck,name="productattributecheck"),
+    path("productvalue/",views.ProductValues.as_view(),name="productvalue"),
+    path("productvaluecheck/",views.productvaluescheck,name="productvaluecheck"),
+    path("productasscos/",views.ProductsAsscos.as_view(),name="productasscos"),
+    path("productasscoscheck/",views.productasscoscheck,name="productasscoscheck"),
+    path("user/",views.User.as_view(),name="user"),
+    path("usercheck/",views.usercheck,name="usercheck"),
+    path("userwishlist/",views.UserWishList.as_view(),name="userwishlist"),
+    path("userlistcheck/",views.userlistcheck,name="userlistcheck"),
+    path("useraddress/",views.UserAddress.as_view(),name="useraddress"),
+    path("useraddresscheck/",views.useraddresscheck,name="useraddresscheck"),
+
+
+
+
+
+
+
 
 
 
