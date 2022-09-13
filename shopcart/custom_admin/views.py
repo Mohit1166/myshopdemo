@@ -17,6 +17,10 @@ from django.utils.decorators import method_decorator
 
 
 def adminlogin(request):
+      """_summary_
+       Returns:
+          _type_: login.html page
+      """
       if request.user.is_authenticated:
             return redirect("/adminpanel/")
 
@@ -38,6 +42,11 @@ def adminlogin(request):
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='admin_login')
 def start(request):
+      """_summary_
+
+      Returns:
+          _type_: starter.html page
+      """
       return render(request,"starter.html")
 
 def admin_logout(request):
@@ -213,19 +222,17 @@ def contactscheck(request):
 
 #For Category
 
-class Category(View):
+class Categorys(View):
      
       def get(self,request):
-            obj=CategoryForm
-            return render(request,"category.html",{'form':obj})
+            obj=CategoryForm()
+            return render(request,"category_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=CategoryForm(request.POST,request.FILES)
+            obj=CategoryForm(request.POST)
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
+                  obj.save()
                   return redirect('custom_admin:category')
             else:
                   return render(request,"category_form.html",{'form':obj})
@@ -592,6 +599,7 @@ def ordercheck(request):
       return render(request,"order.html",keys)
 
 #For UserOrder
+
 class UserOrder(View):
      
       def get(self,request):

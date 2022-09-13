@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Banner form</li>
+                        <li class="breadcrumb-item active">Category Form</li>
                     </ol>
                 </div>
             </div>
@@ -28,30 +28,36 @@
                     <!-- general form elements -->
                     <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title" style="position: relative;left: 150px;"> Add Banners </h3>
+                            <h3 class="card-title" style="position: relative;left: 150px;"> Add Category </h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{% url 'custom_admin:bannersform' %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'custom_admin:category_form' %}" method="post"enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="banner_name">Banner's name</label>
-                                    {{ form.Name }}
+                                    <label for="name">Category name</label>
+                                    {{ form.name }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="banner_path">Banner's Path</label>
-                                    {{ form.banner_path }}
-                                    <!-- <div class="input-group">
-                      <div class="custom-file">
-                        <label class="custom-file-label" for="banner_path">Choose file</label>
-                        {{ form.banner_path }}
-                      </div>
-                    </div> -->
+                                    <label for="parent_id">parent_id</label>
+                                    {{ form.parent_id }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="created_by">created_by</label>
+                                    {{ form.created_by }}
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="modify_by">modify_by</label>
+                                    {{ form.modify_by }}
+
                                 </div>
                                 <div class="form-check">
-                                    <label class="form-check-label" for="status">Status</label>
-                                    {{ form.status_bit }}
+                                    <label class="form-check-label" for="status">Modify Status</label>
+                                    {{ form.modify_status }}
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -70,15 +76,15 @@
 
 {% endblock %}
 {% block script %}
-  <script>
-    $(document).ready(function(){
+<script>
+    $(document).ready(function () {
         setNavBar()
     });
 
     // set navebar
-    function setNavBar(){ 
+    function setNavBar() {
         $(".nav-link").removeClass("active")
         $(".category-menu").addClass("active")
     }
 </script>
-  {% endblock %}
+{% endblock %}
