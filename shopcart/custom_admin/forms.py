@@ -76,32 +76,28 @@ class UserAddress(forms.ModelForm):
         model =UserAddress
         fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"
+class Coupons(forms.ModelForm):  
+    class Meta:  
+        model =Coupons
+        fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"
+class CouponsUsed(forms.ModelForm):  
+    class Meta:  
+        model =CouponsUsed
+        fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"
+class PaymentGateway(forms.ModelForm):  
+    class Meta:  
+        model =PaymentGateway
+        fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"
+class OrderDetails(forms.ModelForm):  
+    class Meta:  
+        model =OrderDetails
+        fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"
+class UserOrder(forms.ModelForm):  
+    class Meta:  
+        model =UserOrder
+        fields = "__all__"
 
-# class User(forms.ModelForm):  
-#     class Meta:  
-#         model =User
-#         fields = "__all__"

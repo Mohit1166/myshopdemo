@@ -1,0 +1,45 @@
+{% extends 'starter.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="col-sm-12" style="position: relative;left: 7px;">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item  "><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Banner form</li>
+                            </ol>
+                        </div>
+                        <br>
+
+                        <form action="{% url 'custom_admin:bannersform' %}">
+                            <button type="submit" class="btn btn-sm btn-primary"
+                                style="float: right; width: 150px;">Add</button>
+                        </form>
+                        <!-- <div style="display: flex; justify-content: flex-end;"></div> -->
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        setNavBar()
+    });
+
+    // set navebar
+    function setNavBar() {
+        $(".nav-link").removeClass("active")
+        $(".coupons-menu").addClass("active")
+    }
+</script>
+{% endblock %}

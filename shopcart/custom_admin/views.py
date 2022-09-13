@@ -482,3 +482,137 @@ def useraddresscheck(request):
       obj=UserAddress.objects.all()
       keys={"obj":obj}
       return render(request,"useraddress.html",keys)
+
+
+ #For Coupons
+class Coupons(View):
+     
+      def get(self,request):
+            obj=Coupons
+            return render(request,"coupons.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=Coupons(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:coupons')
+            else:
+                  return render(request,"coupons_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def couponscheck(request):
+      obj=Coupons.objects.all()
+      keys={"obj":obj}
+      return render(request,"coupons.html",keys)
+
+
+#For Coupons-Used
+class CouponsUsed(View):
+     
+      def get(self,request):
+            obj=CouponsUsed
+            return render(request,"coupons_used.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=CouponsUsed(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:couponsused')
+            else:
+                  return render(request,"coupons_usedform.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def couponsusedcheck(request):
+      obj=CouponsUsed.objects.all()
+      keys={"obj":obj}
+      return render(request,"coupons_used.html",keys)
+
+
+#For PaymentGateway
+class PaymentGateway(View):
+     
+      def get(self,request):
+            obj=PaymentGateway
+            return render(request,"payment.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=PaymentGateway(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:payment')
+            else:
+                  return render(request,"payment_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def paymentcheck(request):
+      obj=PaymentGateway.objects.all()
+      keys={"obj":obj}
+      return render(request,"payment.html",keys)
+
+
+#For OrderDetails
+class OrderDetails(View):
+     
+      def get(self,request):
+            obj=OrderDetails
+            return render(request,"order.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=OrderDetails(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:payment')
+            else:
+                  return render(request,"order_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def ordercheck(request):
+      obj=OrderDetails.objects.all()
+      keys={"obj":obj}
+      return render(request,"order.html",keys)
+
+#For UserOrder
+class UserOrder(View):
+     
+      def get(self,request):
+            obj=UserOrder
+            return render(request,"userorder.html",{'form':obj})
+
+
+      def post(self,request):
+            obj=UserOrder(request.POST,request.FILES)
+            if obj.is_valid():
+                  instance=obj.save()
+                  print(instance.banner_path.path)
+                 
+                  return redirect('custom_admin:userorder')
+            else:
+                  return render(request,"userorder_form.html",{'form':obj})
+
+
+
+@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+def userordercheck(request):
+      obj=UserOrder.objects.all()
+      keys={"obj":obj}
+      return render(request,"userorder.html",keys)

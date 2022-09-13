@@ -49,6 +49,19 @@ urlpatterns = [
     path("userlistcheck/",views.userlistcheck,name="userlistcheck"),
     path("useraddress/",views.UserAddress.as_view(),name="useraddress"),
     path("useraddresscheck/",views.useraddresscheck,name="useraddresscheck"),
+    path("coupons/",views.Coupons.as_view(),name="coupons"),
+    path("couponscheck/",views.couponscheck,name="couponscheck"),
+    path("couponsused/",views.CouponsUsed.as_view(),name="couponsused"),
+    path("couponsusedcheck/",views.couponsusedcheck,name="couponsusedcheck"),
+    path("payment/",views.PaymentGateway.as_view(),name="payment"),
+    path("paymentcheck/",views.paymentcheck,name="paymentcheck"),
+    path("order/",views.OrderDetails.as_view(),name="order"),
+    path("ordercheck/",views.ordercheck,name="ordercheck"),
+    path("userorder/",views.UserOrder.as_view(),name="userorder"),
+    path("userordercheck/",views.userordercheck,name="userordercheck"),
+
+
+
 
 
 
