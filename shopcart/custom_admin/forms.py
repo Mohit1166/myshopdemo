@@ -4,7 +4,7 @@ from custom_admin.models import *
 class BannersForm(forms.ModelForm):  
     class Meta:  
         model = Banners  
-        fields = "__all__"
+        fields = "__all__"  #("name","roll","city")
         
 class Config(forms.ModelForm):  
     class Meta:  
@@ -29,7 +29,7 @@ class Contacts(forms.ModelForm):
 class CategoryForm(forms.ModelForm):  
     class Meta:  
         model =Category
-        fields = "__all__"
+        fields =("name","modify_status","parent_id")
 
 class ProductForm(forms.ModelForm):  
     class Meta:  

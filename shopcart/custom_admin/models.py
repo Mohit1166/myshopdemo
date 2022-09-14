@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 
 class Configuration(models.Model):
     conf_key=models.CharField(max_length=45)
@@ -70,7 +71,7 @@ class Contacts(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=100)
-    parent_id=models.IntegerField()
+    parent_id=models.IntegerField(default=1)
     created_by=models.IntegerField()
     created_date=models.DateTimeField(auto_now_add=True)
     modify_by=models.IntegerField()
@@ -91,7 +92,7 @@ class Products(models.Model):
       to_special_price=models.DateField()
       modify_status=models.BooleanField()
       quantity=models.IntegerField()
-      meta_title=models.CharField(max_length=45)
+      meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
       modify_status=models.BooleanField()

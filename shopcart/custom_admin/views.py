@@ -12,7 +12,7 @@ from custom_admin.forms import *
 # from .models import Banners,Configuration,Cms,Email,Contacts,Category,Products
 from custom_admin.models import *
 from django.utils.decorators import method_decorator
-# from custom_admin.models import Banners
+
 
 
 
@@ -232,7 +232,10 @@ class Categorys(View):
       def post(self,request):
             obj=CategoryForm(request.POST)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  instance.created_by=request.user.id
+                  instance.modify_by=request.user.id
+                  instance.save()
                   return redirect('custom_admin:category')
             else:
                   return render(request,"category_form.html",{'form':obj})
