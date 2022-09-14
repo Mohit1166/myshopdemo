@@ -245,6 +245,27 @@ def categorycheck(request):
       keys={"obj":obj}
       return render(request,"category.html",keys)
 
+class CategoryDelete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=Category.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:category')
+
+class CategoryEdit(View):
+      def get(self,request,id):
+            obj=Category.objects.get(id=id)
+            fm=CategoryForm(instance=obj)
+            return render(request,'category_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=Category.objects.get(id=id)
+            fm=CategoryForm(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:category')
+
 # For Product
 class Product(View):
      

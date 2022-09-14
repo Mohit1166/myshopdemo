@@ -31,8 +31,10 @@ urlpatterns = [
     path("contactsforms/",views.contactscheck,name="contactsform"),
     path("category/",views.Categorys.as_view(),name="category_form"),
     path("categoryforms/",views.categorycheck,name="category"),
-    path("products/",views.Product.as_view(),name="products"),
-    path("productsforms/",views.productscheck,name="productsform"),
+    path("categorydelete/",views.CategoryDelete.as_view(),name="category_delete"),
+    path("categoryedit/<int:id>/",views.CategoryEdit.as_view(),name="categoryedit"),
+    path("products/",views.Product.as_view(),name="products_form"),
+    path("productsforms/",views.productscheck,name="products"),
     path("productscateg/",views.ProductCategory.as_view(),name="productscategories"),
     path("productscategforms/",views.productscategorycheck,name="productscategoriesgform"),
     path("productsimages/",views.ProductImages.as_view(),name="productsimages"),
@@ -59,8 +61,7 @@ urlpatterns = [
     path("ordercheck/",views.ordercheck,name="ordercheck"),
     path("userorder/",views.UserOrder.as_view(),name="userorder"),
     path("userordercheck/",views.userordercheck,name="userordercheck"),
-
-
+   
 
 
 
