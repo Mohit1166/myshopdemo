@@ -72,9 +72,9 @@ class Contacts(models.Model):
 class Category(models.Model):
     name=models.CharField(max_length=100)
     parent_id=models.IntegerField(default=1)
-    created_by=models.IntegerField()
+    created_by=models.IntegerField(null=True,blank=True)
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField()
+    modify_by=models.IntegerField(null=True,blank=True)
     modify_date=models.DateTimeField(auto_now=True)
     modify_status=models.BooleanField()
     class Meta:
