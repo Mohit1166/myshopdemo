@@ -132,6 +132,9 @@ class ProductsImages(models.Model):
         verbose_name="ProductsImages"
         verbose_name_plural="ProductsImages"
 
+        def __str__(self):
+            return self.image_names
+
 class ProductAttributes(models.Model):
      name=models.CharField(max_length=45)
      created_by=models.IntegerField()

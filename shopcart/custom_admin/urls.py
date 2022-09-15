@@ -41,8 +41,10 @@ urlpatterns = [
     path("productscategforms/",views.productscategorycheck,name="productscategory"),
     path("productcategorydelete/",views.ProductCategoryDelete.as_view(),name="product_category_delete"),
     path("productcategoryedit/<int:id>/",views.ProductCategoryEdit.as_view(),name="product_category_edit"),
-    path("productsimages/",views.ProductImages.as_view(),name="productsimages"),
-    path("productsimagescheck/",views.productsimagecheck,name="productsimagescheck"),
+    path("productsimages/",views.Productimages.as_view(),name="productsimages_form"),
+    path("productsimagescheck/",views.productsimagecheck,name="productsimages"),
+    path("productimagedelete/",views.ProductCategoryDelete.as_view(),name="product_image_delete"),
+
     path("productattribute/",views.ProductAttributes.as_view(),name="productattribute"),
     path("productattributecheck/",views.attributecheck,name="productattributecheck"),
     path("productvalue/",views.ProductValues.as_view(),name="productvalue"),
