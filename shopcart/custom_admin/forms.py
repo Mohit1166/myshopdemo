@@ -1,3 +1,4 @@
+from dataclasses import field
 from django import forms
 from custom_admin.models import *
 
@@ -34,9 +35,11 @@ class CategoryForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):  
     class Meta:  
         model =Products
-        fields = "__all__"
+        fields= "__all__"
+        # fields = ("name","sku","short_description","long_description","price","special_price","from_special_price",
+        # "modify_status","quantity","meta_title","meta_desc","meta_keywords","is_featured,")
 
-class ProductCategory(forms.ModelForm):  
+class ProductCategorys(forms.ModelForm):  
     class Meta:  
         model =ProductsCategory
         fields = "__all__"

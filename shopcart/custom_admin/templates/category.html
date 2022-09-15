@@ -35,8 +35,13 @@
                             <tbody>
                                 {% for i in obj %}
                                 <tr>
+                                    
                                     <td>{{i.name}}</td>
+                                    {% if i.parent_id == None %}
+                                    <td>-</td>
+                                    {% else %}
                                     <td>{{i.parent_id}}</td>
+                                    {% endif %}
                                     <td>{{i.created_by}}</td>
                                     <td>{{i.created_date}}</td>
                                     <td>{{i.modify_by}}</td>

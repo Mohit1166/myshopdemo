@@ -98,10 +98,10 @@ class Products(models.Model):
       meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
-      modify_status=models.BooleanField()
-      created_by=models.IntegerField()
+    #   modify_status=models.BooleanField()
+      created_by=models.IntegerField(default=1)
       created_date=models.DateTimeField(auto_now_add=True)
-      modify_by=models.IntegerField()
+      modify_by=models.IntegerField(default=1)
       modify_date=models.DateTimeField(auto_now=True)
       is_featured=models.BooleanField()
       class Meta:
@@ -116,6 +116,9 @@ class ProductsCategory(models.Model):
     class Meta:
         verbose_name="ProductsCategory"
         verbose_name_plural="ProductsCategory"
+
+    # def __str__(self):
+    #     return self.product_id
 
 class ProductsImages(models.Model):
     image_names=models.CharField(max_length=45)

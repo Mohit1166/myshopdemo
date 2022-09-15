@@ -273,16 +273,16 @@ class CategoryEdit(View):
 class Product(View):
      
       def get(self,request):
-            obj=ProductForm
-            return render(request,"products.html",{'form':obj})
+            
+            obj=ProductForm()
+            return render(request,"products_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductForm(request.POST,request.FILES)
+            obj=ProductForm(request.POST)
+            
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
+                  obj.save()
                   return redirect('custom_admin:products')
             else:
                   return render(request,"products_form.html",{'form':obj})
@@ -292,25 +292,46 @@ class Product(View):
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
       obj=Products.objects.all()
+     
       keys={"obj":obj}
       return render(request,"products.html",keys)
+
+class ProductDelete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=Products.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:products')
+
+class ProductEdit(View):
+      def get(self,request,id):
+            obj=Products.objects.get(id=id)
+            fm=ProductForm(instance=obj)
+            return render(request,'product_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=Category.objects.get(id=id)
+            fm=CategoryForm(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:products')
+
 
 
 # For ProductCategory
 class ProductCategory(View):
      
       def get(self,request):
-            obj=ProductCategory
-            return render(request,"productcateg.html",{'form':obj})
+            obj=ProductCategorys()
+            return render(request,"productcateg_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductCategory(request.POST,request.FILES)
+            obj=ProductCategorys(request.POST)
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
-                  return redirect('custom_admin:productscategories')
+                  obj.save()
+                  return redirect('custom_admin:productscategory')
             else:
                   return render(request,"productcateg_form.html",{'form':obj})
 
@@ -318,9 +339,30 @@ class ProductCategory(View):
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscategorycheck(request):
-      obj=ProductCategory.objects.all()
+      obj=ProductsCategory.objects.all()
       keys={"obj":obj}
       return render(request,"productcateg.html",keys)
+
+class ProductCategoryDelete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=ProductsCategory.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:productscategory')
+
+class ProductCategoryEdit(View):
+      def get(self,request,id):
+            obj=ProductsCategory.objects.get(id=id)
+            fm=ProductCategorys(instance=obj)
+            return render(request,'productcateg_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=ProductsCategory.objects.get(id=id)
+            fm=ProductCategorys(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:productscategory')
 
 
 
