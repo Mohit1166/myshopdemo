@@ -232,7 +232,10 @@ class Categorys(View):
       def post(self,request):
             obj=CategoryForm(request.POST)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
                   return redirect('custom_admin:category')
             else:
                   return render(request,"category_form.html",{'form':obj})

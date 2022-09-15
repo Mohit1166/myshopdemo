@@ -71,15 +71,18 @@ class Contacts(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=100)
-    parent_id=models.IntegerField(default=1)
-    created_by=models.IntegerField(null=True,blank=True)
+    parent_id=models.ForeignKey("self",null=True,blank=True,on_delete=models.CASCADE)
+    created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_create_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField(null=True,blank=True)
+    modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_modified_by')
     modify_date=models.DateTimeField(auto_now=True)
     modify_status=models.BooleanField()
     class Meta:
         verbose_name="Category"
         verbose_name_plural="Category"
+        
+    def __str__(self):
+        return self.name
         
 class Products(models.Model):
       name=models.CharField(max_length=100)
