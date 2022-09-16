@@ -436,6 +436,30 @@ def attributecheck(request):
       return render(request,"attributes.html",keys)
 
 
+class AttributeDelete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=ProductAttributes.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:productattribute')
+
+class ProductAttributeEdit(View):
+      def get(self,request,id):
+            obj=ProductAttributes.objects.get(id=id)
+            fm=Productattributes(instance=obj)
+            return render(request,'attributes_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=ProductAttributes.objects.get(id=id)
+            fm=Productattributes(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:productattribute')
+
+
+
+
 # For Product Attributes Values
 class ProductValues(View):
      
