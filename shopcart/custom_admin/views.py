@@ -347,9 +347,9 @@ class ProductCategoryDelete(View):
       def post(self,request):
             data=request.POST
             id=data.get('id')
-            fm=ProductsImages.objects.get(id=id)
+            fm=ProductsCategory.objects.get(id=id)
             fm.delete()
-            return redirect('custom_admin:productsimages')
+            return redirect('custom_admin:productscategory')
 
 class ProductCategoryEdit(View):
       def get(self,request,id):
@@ -367,7 +367,7 @@ class ProductCategoryEdit(View):
 
 
 # For Product Images
-class Productimages(View):
+class Productimage(View):
      
       def get(self,request):
             obj=ProductImages()
@@ -394,9 +394,24 @@ class ProductImageDelete(View):
       def post(self,request):
             data=request.POST
             id=data.get('id')
-            fm=ProductsCategory.objects.get(id=id)
+            fm=ProductsImages.objects.get(id=id)
             fm.delete()
             return redirect('custom_admin:productsimages')
+
+
+class ProductImageEdit(View):
+      def get(self,request,id):
+            obj=ProductsImages.objects.get(id=id)
+            fm=ProductImages(instance=obj)
+            return render(request,'productimg_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=ProductsImages.objects.get(id=id)
+            fm=ProductImages(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:productsimages')
+
 
 
 # For Product Attributes
