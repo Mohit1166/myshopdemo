@@ -269,18 +269,16 @@ class CategoryEdit(View):
                   fm.save()
                   return redirect('custom_admin:category')
 
-# For Product
-class Product(View):
+#For Products
+class ProductShop(View):
      
       def get(self,request):
-            
             obj=ProductForm()
             return render(request,"products_form.html",{'form':obj})
 
 
       def post(self,request):
             obj=ProductForm(request.POST)
-            
             if obj.is_valid():
                   obj.save()
                   return redirect('custom_admin:products')
@@ -292,7 +290,6 @@ class Product(View):
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
       obj=Products.objects.all()
-     
       keys={"obj":obj}
       return render(request,"products.html",keys)
 
@@ -311,8 +308,8 @@ class ProductEdit(View):
             return render(request,'product_edit.html',{'form':fm})
 
       def post(self,request,id):
-            cat=Category.objects.get(id=id)
-            fm=CategoryForm(request.POST ,instance=cat)
+            cat=Products.objects.get(id=id)
+            fm=ProductForm(request.POST ,instance=cat)
             if fm.is_valid():
                   fm.save()
                   return redirect('custom_admin:products')
@@ -375,7 +372,7 @@ class Productimage(View):
 
 
       def post(self,request):
-            obj=ProductImages(request.POST)
+            obj=ProductImages(request.POST,request.FILES)
             if obj.is_valid():
                   obj.save()
                   return redirect('custom_admin:productsimages')
@@ -415,19 +412,17 @@ class ProductImageEdit(View):
 
 
 # For Product Attributes
-class ProductAttributes(View):
+class Productattribute(View):
      
       def get(self,request):
-            obj=ProductAttributes
-            return render(request,"attributes.html",{'form':obj})
+            obj=Productattributes()
+            return render(request,"attributes_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductAttributes(request.POST,request.FILES)
+            obj=Productattributes(request.POST)
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
+                  obj.save()
                   return redirect('custom_admin:productattribute')
             else:
                   return render(request,"attributes_form.html",{'form':obj})

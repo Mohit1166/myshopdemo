@@ -49,7 +49,7 @@ class ProductImages(forms.ModelForm):
         model =ProductsImages
         fields = "__all__"
 
-class ProductAttributes(forms.ModelForm):  
+class Productattributes(forms.ModelForm):  
     class Meta:  
         model =ProductAttributes
         fields = "__all__"
