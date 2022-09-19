@@ -69,6 +69,7 @@ urlpatterns = [
     path("ordercheck/",views.ordercheck,name="ordercheck"),
     path("userorder/",views.UserOrder.as_view(),name="userorder"),
     path("userordercheck/",views.userordercheck,name="userordercheck"),
+    
    
 
 

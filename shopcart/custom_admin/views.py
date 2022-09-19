@@ -273,19 +273,31 @@ class CategoryEdit(View):
 class ProductShop(View):
      
       def get(self,request):
-            obj=ProductForm()
-            return render(request,"products_form.html",{'form':obj})
-
+            product=ProductForm()
+            productimg=ProductImages()
+            productattri=Productattributes()
+            return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
 
       def post(self,request):
-            obj=ProductForm(request.POST,request.FILES)
-            if obj.is_valid():
-                  instance=obj.save()
+            form=ProductForm(request.POST)
+            form1=ProductImages(request.POST,request.FILES)
+            form2=Productattributes(request.POST)
+
+            if form.is_valid():
+                  form.save()
+
+            if form1.is_valid():
+                  instance=form1.save()
                   print(instance.image.path)
+                  # img_obj=form1.instance
+                  # print(instance.image.path)
+            
+            if form2.is_valid():
+                  form2.save()
                   
                   return redirect('custom_admin:products')
             else:
-                  return render(request,"products_form.html",{'form':obj})
+                  return render(request,"main_form.html",{"form":form,"form1":form1,"form2":form2})
 
 
 
@@ -315,7 +327,25 @@ class ProductEdit(View):
             if fm.is_valid():
                   fm.save()
                   return redirect('custom_admin:products')
+#For Main Product
+# class ProductAll(View):
+     
+#       def get(self,request):
+#             obj=ProductForm()
+#             return render(request,"products_form.html",{'form':obj})
 
+
+#       def post(self,request):
+#             form=ProductForm(request.POST)
+#             obj=ProductForm(request.POST,request.FILES)
+#             form2=ProductForm(request.POST)
+#             if obj.is_valid():
+#                   instance=obj.save()
+#                   print(instance.image.path)
+                  
+#                   return redirect('custom_admin:products')
+#             else:
+#                   return render(request,"products_form.html",{'form':obj})
 
 
 # For ProductCategory

@@ -1,5 +1,6 @@
 
 
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -98,7 +99,7 @@ class Products(models.Model):
       meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
-      image=models.ImageField(blank=True, upload_to='Product_Images')
+      #image=models.ImageField(blank=True, upload_to='Product_Images')
     #   modify_status=models.BooleanField()
       created_by=models.IntegerField(default=1)
       created_date=models.DateTimeField(auto_now_add=True)
@@ -108,6 +109,9 @@ class Products(models.Model):
       class Meta:
           verbose_name="Products"
           verbose_name_plural="Products"
+
+      def __str__(self):
+          return self.name
 
 class ProductsCategory(models.Model):
     # product_id=models.IntegerField()
@@ -122,19 +126,19 @@ class ProductsCategory(models.Model):
     #     return self.product_id
 
 class ProductsImages(models.Model):
-    image_names=models.CharField(max_length=45)
+    image=models.ImageField(upload_to='Product_Images',default='')
     modify_status=models.BooleanField()
     created_by=models.IntegerField()
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField()
+    modify_by=models.IntegerField(default=1)
     modify_date=models.DateTimeField(auto_now=True)
     product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
     class Meta:
         verbose_name="ProductsImages"
         verbose_name_plural="ProductsImages"
 
-        def __str__(self):
-            return self.image_names
+    def __str__(self):
+        return self.image_names
 
 class ProductAttributes(models.Model):
      name=models.CharField(max_length=45)
