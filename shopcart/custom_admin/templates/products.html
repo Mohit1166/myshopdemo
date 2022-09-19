@@ -41,7 +41,9 @@
                                     <th>modify_by</th>
                                     <th>modify_date</th>
                                     <th>is_featured</th>
-                                     <th>Action</th>
+                                    <th>image</th>
+                                    <th>Action;</th>
+                                     <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,8 +69,17 @@
                                     <td>{{i.modify_date}}</td>
                                      <td>{{i.is_featured}}</td>
                                      <!-- <td>{{i.image}}</td> -->
+                                     {% if i.image %}
+                                     <td>
+                                        <img src="{{ i.image.url }}" alt="" height="50px" ;width="50px">
+                                     </td>
+                                     {% else %}
+                                     <td>
+                                        <img src=" /shopcart/media/Product_Images " alt="" height="50px" ;width="50px">
+
+                                     </td>
                                     
-                                   
+                                    {% endif %}
                                     <td>
 
                                         <button type="submit" value="Delete" class="btn btn-default btn-sm"

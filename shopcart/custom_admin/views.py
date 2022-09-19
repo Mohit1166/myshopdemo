@@ -278,9 +278,11 @@ class ProductShop(View):
 
 
       def post(self,request):
-            obj=ProductForm(request.POST)
+            obj=ProductForm(request.POST,request.FILES)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  print(instance.image.path)
+                  
                   return redirect('custom_admin:products')
             else:
                   return render(request,"products_form.html",{'form':obj})

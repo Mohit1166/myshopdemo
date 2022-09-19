@@ -34,7 +34,7 @@ admin.site.register(Category,CategoryAdmin)
 class ProductsAdmin(admin.ModelAdmin):
     list_display=("name","sku","short_description","long_description","price","special_price",
                   "from_special_price","to_special_price","modify_status","quantity","meta_title","meta_desc",
-                  "meta_keywords","modify_status","created_by","created_date","modify_date","modify_by","is_featured")
+                  "meta_keywords","modify_status","created_by","created_date","modify_date","modify_by","is_featured","image")
 admin.site.register(Products,ProductsAdmin)
 
 class ProductsCategoryAdmin(admin.ModelAdmin):

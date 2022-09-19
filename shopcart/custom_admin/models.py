@@ -87,7 +87,6 @@ class Category(models.Model):
 class Products(models.Model):
       name=models.CharField(max_length=100)
       sku=models.CharField(max_length=100)
-      image=models.ImageField(blank=True, upload_to='Product_Images')
       short_description=models.CharField(max_length=100)
       long_description=models.TextField()
       price=models.FloatField()
@@ -99,6 +98,7 @@ class Products(models.Model):
       meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
+      image=models.ImageField(blank=True, upload_to='Product_Images')
     #   modify_status=models.BooleanField()
       created_by=models.IntegerField(default=1)
       created_date=models.DateTimeField(auto_now_add=True)
