@@ -47,7 +47,7 @@ class ProductsImagesAdmin(admin.ModelAdmin):
 admin.site.register(ProductsImages,ProductsImagesAdmin)
 
 class ProductAttributesAdmin(admin.ModelAdmin):
-    list_display=("name","created_by","created_date","modify_by","modify_date")
+    list_display=("name","created_date","modify_date")
 admin.site.register(ProductAttributes,ProductAttributesAdmin)
 
 class ProductsAttributesValuesAdmin(admin.ModelAdmin):

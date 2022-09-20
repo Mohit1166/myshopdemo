@@ -230,6 +230,7 @@ class Categorys(View):
 
 
       def post(self,request):
+          
             obj=CategoryForm(request.POST)
             if obj.is_valid():
                   instance=obj.save()
@@ -279,6 +280,7 @@ class ProductShop(View):
             return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
 
       def post(self,request):
+           
             product=ProductForm(request.POST)
             productimg=ProductImages(request.POST,request.FILES)
             productattri=Productattributes(request.POST)
@@ -286,10 +288,14 @@ class ProductShop(View):
             if product.is_valid():
                    if productattri.is_valid():
                          if productimg.is_valid():
-                               product.save()
-                               productattri.save()
-                               instance=productimg.save()
+                               instance=product.save()
+                              #  instance.created_by=request.user
+                              #  instance.modify_by=request.user
+                               instance_1=productattri.save()
+                               instance_2=productimg.save()
                                instance.save()
+                               instance_1.save()
+                               instance_2.save()
                              
                                return redirect('custom_admin:products')
             else:
@@ -300,6 +306,7 @@ class ProductShop(View):
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
       obj=Products.objects.all()
+     
       keys={"obj":obj}
       return render(request,"products.html",keys)
 

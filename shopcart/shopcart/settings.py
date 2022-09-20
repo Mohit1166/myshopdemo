@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'shopcart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'shopify_admin',
+        'NAME':'ecommerce_shopify',
         'HOST': 'localhost',
         'USER':'root',
         'PASSWORD':'p@ssw0rd',
