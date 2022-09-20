@@ -16,10 +16,13 @@
                         <br>
 
                         <form action="{% url 'custom_admin:products_form' %} " enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-sm btn-primary"
+                            <button type="submit" class="btn btn-block btn-primary"
                                 style="float: right; width: 150px;">Add</button>
+
                         </form>
-                        <table class="table table-bordered tables-hover  ">
+
+                        <div class="card-body" style="width:100%; overflow: scroll;">
+                        <table class="table table-bordered table-hover" style="width:2000px;">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -42,7 +45,7 @@
                                     <th>modify_date</th>
                                     <th>is_featured</th>
                                     <th>image</th>
-                                    <th>Action;</th>
+                                    <th>Action</th>
                                      <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
@@ -122,6 +125,7 @@
                                             class="btn btn-default btn-sm fas fa-edit"></a>
 
                                         </form>
+                                    </div>
 
                                     </td>
                                 </tr>

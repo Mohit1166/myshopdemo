@@ -99,11 +99,11 @@ class Products(models.Model):
       meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
-      #image=models.ImageField(blank=True, upload_to='Product_Images')
-    #   modify_status=models.BooleanField()
       created_by=models.IntegerField(default=1)
+      #created_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='created_by')
       created_date=models.DateTimeField(auto_now_add=True)
       modify_by=models.IntegerField(default=1)
+      #modify_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='modify_by')
       modify_date=models.DateTimeField(auto_now=True)
       is_featured=models.BooleanField()
       class Meta:
@@ -137,8 +137,7 @@ class ProductsImages(models.Model):
         verbose_name="ProductsImages"
         verbose_name_plural="ProductsImages"
 
-    def __str__(self):
-        return self.image_names
+  
 
 class ProductAttributes(models.Model):
      name=models.CharField(max_length=45)

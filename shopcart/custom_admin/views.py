@@ -279,25 +279,21 @@ class ProductShop(View):
             return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
 
       def post(self,request):
-            form=ProductForm(request.POST)
-            form1=ProductImages(request.POST,request.FILES)
-            form2=Productattributes(request.POST)
+            product=ProductForm(request.POST)
+            productimg=ProductImages(request.POST,request.FILES)
+            productattri=Productattributes(request.POST)
 
-            if form.is_valid():
-                  form.save()
-
-            if form1.is_valid():
-                  instance=form1.save()
-                  print(instance.image.path)
-                  # img_obj=form1.instance
-                  # print(instance.image.path)
-            
-            if form2.is_valid():
-                  form2.save()
-                  
-                  return redirect('custom_admin:products')
+            if product.is_valid():
+                   if productattri.is_valid():
+                         if productimg.is_valid():
+                               product.save()
+                               productattri.save()
+                               instance=productimg.save()
+                               instance.save()
+                             
+                               return redirect('custom_admin:products')
             else:
-                  return render(request,"main_form.html",{"form":form,"form1":form1,"form2":form2})
+                  return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productattri})
 
 
 
