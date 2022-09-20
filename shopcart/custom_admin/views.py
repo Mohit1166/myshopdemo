@@ -120,12 +120,12 @@ class Edit(View):
 class Configuration(View):
      
       def get(self,request):
-            obj=Config()
+            obj=ConfigForm()
             return render(request,"config.html",{'form':obj})
 
 
       def post(self,request):
-            obj=Config(request.POST,request.FILES)
+            obj=ConfigForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -146,12 +146,12 @@ def configurationcheck(request):
 class CMS(View):
      
       def get(self,request):
-            obj=CMS
+            obj=CMSForm
             return render(request,"cms.html",{'form':obj})
 
 
       def post(self,request):
-            obj=CMS(request.POST,request.FILES)
+            obj=CMSForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -172,12 +172,12 @@ def cmscheck(request):
 class Email(View):
      
       def get(self,request):
-            obj=Emails
+            obj=EmailsForm
             return render(request,"email.html",{'form':obj})
 
 
       def post(self,request):
-            obj=Emails(request.POST,request.FILES)
+            obj=EmailsForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -198,12 +198,12 @@ def emailcheck(request):
 class Contacts(View):
      
       def get(self,request):
-            obj=Contacts
+            obj=ContactsForm()
             return render(request,"contacts.html",{'form':obj})
 
 
       def post(self,request):
-            obj=Contacts(request.POST,request.FILES)
+            obj=ContactsForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -275,29 +275,22 @@ class ProductShop(View):
      
       def get(self,request):
             product=ProductForm()
-            productimg=ProductImages()
-            productattri=Productattributes()
+            productimg=ProductImagesForm()
+            productattri=ProductAttributesForm()
             return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
 
       def post(self,request):
            
             product=ProductForm(request.POST)
-            productimg=ProductImages(request.POST,request.FILES)
-            productattri=Productattributes(request.POST)
+            productimg=ProductImagesForm(request.POST,request.FILES)
+            productattri=ProductAttributesForm(request.POST)
 
-            if product.is_valid():
-                   if productattri.is_valid():
-                         if productimg.is_valid():
-                               instance=product.save()
-                              #  instance.created_by=request.user
-                              #  instance.modify_by=request.user
-                               instance_1=productattri.save()
-                               instance_2=productimg.save()
-                               instance.save()
-                               instance_1.save()
-                               instance_2.save()
+            if product.is_valid() and productattri.is_valid() and productimg.is_valid():
+                  instance = product.save()
+                  ProductsImages
+                  
                              
-                               return redirect('custom_admin:products')
+                  return redirect('custom_admin:products')
             else:
                   return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productattri})
 
@@ -355,12 +348,12 @@ class ProductEdit(View):
 class ProductCategory(View):
      
       def get(self,request):
-            obj=ProductCategorys()
+            obj=ProductCategorysForm()
             return render(request,"productcateg_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductCategorys(request.POST)
+            obj=ProductCategorysForm(request.POST)
             if obj.is_valid():
                   obj.save()
                   return redirect('custom_admin:productscategory')
@@ -386,12 +379,12 @@ class ProductCategoryDelete(View):
 class ProductCategoryEdit(View):
       def get(self,request,id):
             obj=ProductsCategory.objects.get(id=id)
-            fm=ProductCategorys(instance=obj)
+            fm=ProductCategorysForm(instance=obj)
             return render(request,'productcateg_edit.html',{'form':fm})
 
       def post(self,request,id):
             cat=ProductsCategory.objects.get(id=id)
-            fm=ProductCategorys(request.POST ,instance=cat)
+            fm=ProductCategorysForm(request.POST ,instance=cat)
             if fm.is_valid():
                   fm.save()
                   return redirect('custom_admin:productscategory')
@@ -402,12 +395,12 @@ class ProductCategoryEdit(View):
 class Productimage(View):
      
       def get(self,request):
-            obj=ProductImages()
+            obj=ProductImagesForm()
             return render(request,"productimg_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductImages(request.POST,request.FILES)
+            obj=ProductImagesForm(request.POST,request.FILES)
             if obj.is_valid():
                   obj.save()
                   return redirect('custom_admin:productsimages')
@@ -434,12 +427,12 @@ class ProductImageDelete(View):
 class ProductImageEdit(View):
       def get(self,request,id):
             obj=ProductsImages.objects.get(id=id)
-            fm=ProductImages(instance=obj)
+            fm=ProductImagesForm(instance=obj)
             return render(request,'productimg_edit.html',{'form':fm})
 
       def post(self,request,id):
             cat=ProductsImages.objects.get(id=id)
-            fm=ProductImages(request.POST ,instance=cat)
+            fm=ProductImagesForm(request.POST ,instance=cat)
             if fm.is_valid():
                   fm.save()
                   return redirect('custom_admin:productsimages')
@@ -450,12 +443,12 @@ class ProductImageEdit(View):
 class Productattribute(View):
      
       def get(self,request):
-            obj=Productattributes()
+            obj=ProductAttributesForm()
             return render(request,"attributes_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=Productattributes(request.POST)
+            obj=ProductAttributesForm(request.POST)
             if obj.is_valid():
                   obj.save()
                   return redirect('custom_admin:productattribute')
@@ -482,29 +475,26 @@ class AttributeDelete(View):
 class ProductAttributeEdit(View):
       def get(self,request,id):
             obj=ProductAttributes.objects.get(id=id)
-            fm=Productattributes(instance=obj)
+            fm=ProductAttributesForm(instance=obj)
             return render(request,'attributes_edit.html',{'form':fm})
 
       def post(self,request,id):
             cat=ProductAttributes.objects.get(id=id)
-            fm=Productattributes(request.POST ,instance=cat)
+            fm=ProductAttributesForm(request.POST ,instance=cat)
             if fm.is_valid():
                   fm.save()
                   return redirect('custom_admin:productattribute')
-
-
-
 
 # For Product Attributes Values
 class ProductValues(View):
      
       def get(self,request):
-            obj=ProductValues
+            obj=ProductValuesForm()
             return render(request,"productvalues.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductValues(request.POST,request.FILES)
+            obj=ProductValuesForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -527,12 +517,12 @@ def productvaluescheck(request):
 class ProductsAsscos(View):
      
       def get(self,request):
-            obj=ProductsAsscos
+            obj=ProductsAsscosForm()
             return render(request,"productasscos.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductsAsscos(request.POST,request.FILES)
+            obj=ProductsAsscosForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -556,12 +546,12 @@ def productasscoscheck(request):
 class User(View):
      
       def get(self,request):
-            obj=User
+            obj=UserForm()
             return render(request,"user.html",{'form':obj})
 
 
       def post(self,request):
-            obj=User(request.POST,request.FILES)
+            obj=UserForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -583,12 +573,12 @@ def usercheck(request):
 class UserWishList(View):
      
       def get(self,request):
-            obj=UserWishList
+            obj=UserWishListForm()
             return render(request,"userlist.html",{'form':obj})
 
 
       def post(self,request):
-            obj=UserWishList(request.POST,request.FILES)
+            obj=UserWishListForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -609,12 +599,12 @@ def userlistcheck(request):
 class UserAddress(View):
      
       def get(self,request):
-            obj=UserAddress
+            obj=UserAddressForm()
             return render(request,"useraddress.html",{'form':obj})
 
 
       def post(self,request):
-            obj=UserAddress(request.POST,request.FILES)
+            obj=UserAddressForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -636,12 +626,12 @@ def useraddresscheck(request):
 class Coupons(View):
      
       def get(self,request):
-            obj=Coupons
+            obj=CouponsForm()
             return render(request,"coupons.html",{'form':obj})
 
 
       def post(self,request):
-            obj=Coupons(request.POST,request.FILES)
+            obj=CouponsForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -663,12 +653,12 @@ def couponscheck(request):
 class CouponsUsed(View):
      
       def get(self,request):
-            obj=CouponsUsed
+            obj=CouponsUsedForm()
             return render(request,"coupons_used.html",{'form':obj})
 
 
       def post(self,request):
-            obj=CouponsUsed(request.POST,request.FILES)
+            obj=CouponsUsedForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -690,12 +680,12 @@ def couponsusedcheck(request):
 class PaymentGateway(View):
      
       def get(self,request):
-            obj=PaymentGateway
+            obj=PaymentGatewayForm
             return render(request,"payment.html",{'form':obj})
 
 
       def post(self,request):
-            obj=PaymentGateway(request.POST,request.FILES)
+            obj=PaymentGatewayForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -717,12 +707,12 @@ def paymentcheck(request):
 class OrderDetails(View):
      
       def get(self,request):
-            obj=OrderDetails
+            obj=OrderDetailsForm()
             return render(request,"order.html",{'form':obj})
 
 
       def post(self,request):
-            obj=OrderDetails(request.POST,request.FILES)
+            obj=OrderDetailsForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
@@ -744,12 +734,12 @@ def ordercheck(request):
 class UserOrder(View):
      
       def get(self,request):
-            obj=UserOrder
+            obj=UserOrderForm()
             return render(request,"userorder.html",{'form':obj})
 
 
       def post(self,request):
-            obj=UserOrder(request.POST,request.FILES)
+            obj=UserOrderForm(request.POST,request.FILES)
             if obj.is_valid():
                   instance=obj.save()
                   print(instance.banner_path.path)
