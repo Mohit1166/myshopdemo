@@ -180,13 +180,16 @@ class ProductAttributes(models.Model):
 class ProductsAttributesValues(models.Model):
     product_attribute=models.ForeignKey(ProductAttributes, on_delete=models.CASCADE)
     attribute_value=models.CharField(max_length=45)
-    created_by=models.IntegerField()
+    created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField()
+    modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_modify_by')
     modify_date=models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name="ProductAttributesValues"
         verbose_name_plural="ProductAttributesValues"
+        
+    def __str__(self):
+        return self.attribute_value
 
 class ProductsAsscos(models.Model):
     Product_id=models.IntegerField()

@@ -272,29 +272,22 @@ class CategoryEdit(View):
 
 #For Products
 class ProductShop(View):
-     
       def get(self,request):
+            # breakpoint()
             product=ProductForm()
             productimg=ProductImagesForm()
             productattri=ProductAttributesForm()
             return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
-
       def post(self,request):
-           
             product=ProductForm(request.POST)
             productimg=ProductImagesForm(request.POST,request.FILES)
             productattri=ProductAttributesForm(request.POST)
-
             if product.is_valid() and productattri.is_valid() and productimg.is_valid():
                   instance = product.save()
                   ProductsImages
-                  
-                             
                   return redirect('custom_admin:products')
             else:
                   return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productattri})
-
-
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
@@ -490,15 +483,13 @@ class ProductValues(View):
      
       def get(self,request):
             obj=ProductValuesForm()
-            return render(request,"productvalues.html",{'form':obj})
+            return render(request,"productvalues_form.html",{'form':obj})
 
 
       def post(self,request):
             obj=ProductValuesForm(request.POST,request.FILES)
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
+                  obj.save()
                   return redirect('custom_admin:productvalue')
             else:
                   return render(request,"productvalues_form.html",{'form':obj})
@@ -510,6 +501,27 @@ def productvaluescheck(request):
       obj=ProductsAttributesValues.objects.all()
       keys={"obj":obj}
       return render(request,"productvalues.html",keys)
+
+class AttributeValueDelete(View):
+      def post(self,request):
+            data=request.POST
+            id=data.get('id')
+            fm=ProductsAttributesValues.objects.get(id=id)
+            fm.delete()
+            return redirect('custom_admin:productvalue')
+
+class ProductValueEdit(View):
+      def get(self,request,id):
+            obj=ProductsAttributesValues.objects.get(id=id)
+            fm=ProductValuesForm(instance=obj)
+            return render(request,'productvalue_edit.html',{'form':fm})
+
+      def post(self,request,id):
+            cat=ProductsAttributesValues.objects.get(id=id)
+            fm=ProductValuesForm(request.POST ,instance=cat)
+            if fm.is_valid():
+                  fm.save()
+                  return redirect('custom_admin:productvalue')
 
 
 
