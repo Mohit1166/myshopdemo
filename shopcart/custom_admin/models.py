@@ -194,7 +194,7 @@ class ProductsAttributesValues(models.Model):
 class ProductsAsscos(models.Model):
     Product_id=models.IntegerField()
     Products_attri_id=models.ForeignKey(ProductAttributes,on_delete=models.CASCADE)
-    Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE)
+    Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE,blank=True)
     class Meta:
         verbose_name="ProductsAsscos"
         verbose_name_plural="ProductsAsscos"

@@ -3,10 +3,11 @@ from django.contrib import admin
 from django import views
 from django.urls import path,include
 from custom_admin import views
-from django.contrib.auth.decorators import login_required,permission_required
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.conf import settings  
-from django.conf.urls.static import static
+# from django.conf.urls.static import static
 
 app_name="custom_admin"
 
@@ -53,8 +54,8 @@ urlpatterns = [
     path("productvaluecheck/",views.productvaluescheck,name="productvalue"),
     path("productvaluedelete/",views.AttributeValueDelete.as_view(),name="attribute_value_delete"), 
     path("productvalueedit/<int:id>/",views.ProductValueEdit.as_view(),name="product_value_edit"),
-    path("productasscos/",views.ProductsAsscos.as_view(),name="productasscos"),
-    path("productasscoscheck/",views.productasscoscheck,name="productasscoscheck"),
+    path("productasscos/",views.ProductsAssociation.as_view(),name="productasscos_form"),
+    path("productasscoscheck/",views.productasscoscheck,name="productasscos"),
     path("user/",views.User.as_view(),name="user"),
     path("usercheck/",views.usercheck,name="usercheck"),
     path("userwishlist/",views.UserWishList.as_view(),name="userwishlist"),

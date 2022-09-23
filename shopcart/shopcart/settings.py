@@ -135,7 +135,7 @@ MEDIA_URL="/media/"
 
 LOGIN_REDIRECT_URL = '/login'
 LOGIN_URL='/logout'
-
+ 
 STATICFILES_DIR =[
     BASE_DIR ,"static"
      ]

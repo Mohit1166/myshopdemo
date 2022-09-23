@@ -1,4 +1,5 @@
 
+from email.mime import image
 from statistics import fmean
 from urllib import request
 from django.shortcuts import render,redirect
@@ -8,7 +9,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required,permission_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone
 from custom_admin.forms import *
+from datetime import datetime
 # from .models import Banners,Configuration,Cms,Email,Contacts,Category,Products
 from custom_admin.models import *
 from django.utils.decorators import method_decorator
@@ -273,21 +276,44 @@ class CategoryEdit(View):
 #For Products
 class ProductShop(View):
       def get(self,request):
-            # breakpoint()
             product=ProductForm()
             productimg=ProductImagesForm()
-            productattri=ProductAttributesForm()
-            return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productattri})
+            productassociation=ProductsAsscosForm()
+            return render(request,"main_form.html",{'form':product,'form1':productimg,'form2':productassociation})
       def post(self,request):
             product=ProductForm(request.POST)
             productimg=ProductImagesForm(request.POST,request.FILES)
-            productattri=ProductAttributesForm(request.POST)
-            if product.is_valid() and productattri.is_valid() and productimg.is_valid():
-                  instance = product.save()
-                  ProductsImages
+            productassociation=ProductsAsscosForm(request.POST)
+            if product.is_valid() and productassociation.is_valid() and productimg.is_valid():
+                  var_product = product.save(commit=False)
+                  # var_product.created_by=request.user.id
+                  var_product.created_date=timezone.now()
+                  # var_product.modify_by=request.user.id
+                  var_product.modify_date=timezone.now()
+                  var_product.save()
+                  for file,stat in zip(request.FILES.getlist('productimg-image'),request.POST.getlist('productimg-modify_status')):
+                        name=file
+                        var_photo=ProductsImages(product_id=var_product,image=name,
+                                                 created_date=timezone.now(),
+                                                 modify_date=timezone.now(),
+                                                 modify_status=stat
+                                                 )
+                        var_photo.save()
+                  for attr,val in zip(request.POST.getlist('productassociation-Products_attri_id'),request.POST.getlist('productassociation-Products_attri_id')):
+                        attr_=ProductAttributes.objects.get(id=attr)
+                        val_=ProductsAttributesValues.objects.get(id=val)
+                        attr_assc=ProductsAsscos(Product_id=var_product,
+                                                Products_attri_id=attr_,
+                                                Products_value_attri=val_
+                                                                           )
+                        attr_assc.save()
+
                   return redirect('custom_admin:products')
             else:
-                  return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productattri})
+                     product=ProductForm()
+                     productimg=ProductImagesForm()
+                     productassociation=ProductsAsscosForm()
+                     return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productassociation})
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
@@ -526,19 +552,17 @@ class ProductValueEdit(View):
 
 
 #  For ProductsAsscos
-class ProductsAsscos(View):
+class ProductsAssociation(View):
      
       def get(self,request):
             obj=ProductsAsscosForm()
-            return render(request,"productasscos.html",{'form':obj})
+            return render(request,"productasscos_form.html",{'form':obj})
 
 
       def post(self,request):
-            obj=ProductsAsscosForm(request.POST,request.FILES)
+            obj=ProductsAsscosForm(request.POST)
             if obj.is_valid():
-                  instance=obj.save()
-                  print(instance.banner_path.path)
-                 
+                  obj.save()
                   return redirect('custom_admin:productasscos')
             else:
                   return render(request,"productasscos_form.html",{'form':obj})
@@ -550,8 +574,6 @@ def productasscoscheck(request):
       obj=ProductsAsscos.objects.all()
       keys={"obj":obj}
       return render(request,"productasscos.html",keys)
-
-
 
 
 #  For User

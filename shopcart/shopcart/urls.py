@@ -17,6 +17,7 @@ from django.contrib import admin
 from django import views
 from django.urls import path,include
 from custom_admin import views
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 #Because root and urls of media are in settings so importing settings
