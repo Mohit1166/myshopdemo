@@ -1,6 +1,4 @@
 
-from email.mime import image
-from statistics import fmean
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
@@ -11,7 +9,6 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from custom_admin.forms import *
-from datetime import datetime
 # from .models import Banners,Configuration,Cms,Email,Contacts,Category,Products
 from custom_admin.models import *
 from django.utils.decorators import method_decorator
@@ -236,10 +233,11 @@ class Categorys(View):
           
             obj=CategoryForm(request.POST)
             if obj.is_valid():
-                  instance=obj.save()
-                  instance.created_by=request.user
-                  instance.modify_by=request.user
-                  instance.save()
+                  form_instance=obj.save(commit=False)
+                  print(f"request.user:{request.user}")
+                  form_instance.created_by=request.user
+                  form_instance.modify_by=request.user
+                  form_instance.save()
                   return redirect('custom_admin:category')
             else:
                   return render(request,"category_form.html",{'form':obj})
@@ -274,6 +272,7 @@ class CategoryEdit(View):
                   return redirect('custom_admin:category')
 
 #For Products
+
 class ProductShop(View):
       def get(self,request):
             product=ProductForm()
