@@ -35,10 +35,9 @@ class CategoryForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):  
     class Meta:  
         model =Products
-        fields= "__all__"
-        # fields = ("name","sku","short_description","long_description","price","special_price","from_special_price",
-        # "modify_status","quantity","meta_title","meta_desc","meta_keywords","is_featured,")
-
+        #fields= ['name','sku','short_description','long_description','price','modify_status','quantity','meta_title','meta_desc','meta_keywords','is_featured']
+        fields="__all__"
+       
 class ProductCategorysForm(forms.ModelForm):  
     class Meta:  
         model =ProductsCategory

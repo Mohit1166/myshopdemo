@@ -19,16 +19,17 @@
                             <button type="submit" class="btn btn-sm btn-primary"
                                 style="float: right; width: 150px;">Add</button>
                         </form>
-                        <table class="table table-bordered tables-hover">
+                        <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>image_names</th>
+                                    
                                     <th>modify_status</th>
                                     <th>modify_by</th>
                                     <th>created_by</th>
                                     <th>created_date</th>
                                     <th>modify_date</th>
                                     <th>product_id</th>
+                                    <th>image</th>
                                      <th>Action</th>
                                 </tr>
                             </thead>
@@ -36,13 +37,23 @@
                                 {% for i in obj %}
                                 <tr>
                                     
-                                    <td>{{i.image_names}}</td>
+                                    
                                     <td>{{i.modify_status}}</td>
                                     <td>{{i.modify_by}}</td>
                                     <td>{{i.created_by}}</td>
                                     <td>{{i.created_date}}</td>
                                     <td>{{i.modify_date}}</td>
                                     <td>{{i.product_id}}</td>
+                                    <!-- <td>{{i.image}}</td> -->
+                                    {% if i.image %}
+                                    <td>
+                                        <img src="{{i.image.url}}" alt="" height="50px" ;width="50px">
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <img src=" /shopcart/media/Product_Images " alt="" height="50px" ;width="50px">
+                                    </td>
+                                    {% endif %}
                                    
                                     <td>
 

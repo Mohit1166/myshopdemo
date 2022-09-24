@@ -116,8 +116,8 @@ class Products(models.Model):
       long_description=models.TextField()
       price=models.FloatField()
       special_price=models.FloatField()
-      from_special_price=models.DateField(auto_now=True)
-      to_special_price=models.DateField(auto_now=True)
+      from_special_price=models.DateTimeField(auto_now_add=True)
+      to_special_price=models.DateTimeField(auto_now_add=True)
       modify_status=models.BooleanField()
       quantity=models.IntegerField()
       meta_title=models.CharField(max_length=45)   
@@ -150,7 +150,7 @@ class ProductsCategory(models.Model):
     #     return self.product_id
 
 class ProductsImages(models.Model):
-    image=models.ImageField(upload_to='Product_Images')
+    image=models.ImageField(upload_to='Product_Images',default="")
     modify_status=models.BooleanField()
     created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
@@ -192,7 +192,7 @@ class ProductsAttributesValues(models.Model):
         return self.attribute_value
 
 class ProductsAsscos(models.Model):
-    Product_id=models.IntegerField()
+    Product_id=models.ForeignKey(Products,on_delete=models.CASCADE,blank=True)
     Products_attri_id=models.ForeignKey(ProductAttributes,on_delete=models.CASCADE)
     Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE,blank=True)
     class Meta:

@@ -284,7 +284,7 @@ class ProductShop(View):
             productimg=ProductImagesForm(request.POST,request.FILES)
             productassociation=ProductsAsscosForm(request.POST)
             if product.is_valid() and productassociation.is_valid() and productimg.is_valid():
-                  var_product = product.save(commit=False)
+                  var_product = product.save()
                   # var_product.created_by=request.user.id
                   var_product.created_date=timezone.now()
                   # var_product.modify_by=request.user.id
@@ -292,16 +292,16 @@ class ProductShop(View):
                   var_product.save()
                   for file,stat in zip(request.FILES.getlist('productimg-image'),request.POST.getlist('productimg-modify_status')):
                         name=file
-                        var_photo=ProductsImages(product_id=var_product,image=name,
+                        var_photo=ProductsImages(product_id=product,image=name,
                                                  created_date=timezone.now(),
                                                  modify_date=timezone.now(),
                                                  modify_status=stat
                                                  )
                         var_photo.save()
-                  for attr,val in zip(request.POST.getlist('productassociation-Products_attri_id'),request.POST.getlist('productassociation-Products_attri_id')):
+                  for attr,val in zip(request.POST.getlist('productassociation-Products_attri_id'),request.POST.getlist('productassociation-Products_value_attri')):
                         attr_=ProductAttributes.objects.get(id=attr)
                         val_=ProductsAttributesValues.objects.get(id=val)
-                        attr_assc=ProductsAsscos(Product_id=var_product,
+                        attr_assc=ProductsAsscos(Product_id=product,
                                                 Products_attri_id=attr_,
                                                 Products_value_attri=val_
                                                                            )
@@ -309,10 +309,10 @@ class ProductShop(View):
 
                   return redirect('custom_admin:products')
             else:
-                     product=ProductForm()
-                     productimg=ProductImagesForm()
-                     productassociation=ProductsAsscosForm()
-                     return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productassociation})
+                  # product=ProductForm()
+                  # productimg=ProductImagesForm()
+                  # productassociation=ProductsAsscosForm()
+                  return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productassociation})
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
