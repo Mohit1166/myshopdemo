@@ -1,0 +1,31 @@
+[
+    {
+        "model":"custom_admin.Coupons",
+        "pk":1,
+        "fields":{
+            "Code":"AABBCF43ERT",
+            "percent":10.00,
+            "created_by":1,
+            "created_date":	"2022-01-11 13:23:04",
+            "modify_by":1,
+            "modify_date":"2022-01-11 13:23:04",
+            "no_of_uses":1
+         }
+
+    },
+    {
+        "model":"custom_admin.Coupons",
+        "pk":2,
+        "fields":{
+            "Code":"AABBCF43ERT",
+            "percent":10.00,
+            "created_by":1,
+            "created_date":	"2022-02-11 13:23:04",
+            "modify_by":1,
+            "modify_date":"2022-02-11 13:23:04",
+            "no_of_uses":1
+         }
+
+    }
+    
+] 

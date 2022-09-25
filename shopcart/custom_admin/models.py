@@ -231,10 +231,10 @@ class UserAddress(models.Model):
 class Coupons(models.Model):
     Code=models.CharField(max_length=45)
     percent=models.FloatField()
-    created_by=models.IntegerField()
-    created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField()
-    modify_date=models.DateTimeField(auto_now=True)
+    created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Coupons_created_by')
+    created_date=models.DateTimeField(auto_now_add=True ,blank=True,null=True)
+    modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Coupons_modify_by')
+    modify_date=models.DateTimeField(auto_now=True,blank=True,null=True)
     no_of_uses=models.IntegerField()
     class Meta:
         verbose_name="Coupons"

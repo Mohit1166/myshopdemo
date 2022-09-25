@@ -656,7 +656,7 @@ def useraddresscheck(request):
 
 
  #For Coupons
-class Coupons(View):
+class Discount_Coupons(View):
      
       def get(self,request):
             obj=CouponsForm()
@@ -664,14 +664,15 @@ class Coupons(View):
 
 
       def post(self,request):
-            obj=CouponsForm(request.POST,request.FILES)
+            obj=CouponsForm(request.POST)
             if obj.is_valid():
                   instance=obj.save()
-                  print(instance.banner_path.path)
-                 
-                  return redirect('custom_admin:coupons')
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
+                  return redirect('custom_admin:coupons_form')
             else:
-                  return render(request,"coupons_form.html",{'form':obj})
+                  return render(request,"coupons.html",{'form':obj})
 
 
 
