@@ -1,33 +1,40 @@
 
 
-from email.policy import default
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import Group
-from django.contrib.auth.models import User
 
-class User(models.Model):
-    Firstname=models.CharField(max_length=45)
-    Lastname=models.CharField(max_length=45)
-    email=models.EmailField()
-    password=models.CharField(max_length=45)
-    status=models.BooleanField()
-    created_date=models.DateTimeField(auto_now_add=True)
-    Manager="M"
-    Customer="C"
-    Admin="A"
-    choose_user=[(Manager,"Manager"),(Customer,"Customer"),(Admin,"Admin")]
-    field = models.ForeignKey(Group,on_delete=models.CASCADE,related_name="user_group")
-    user=models.CharField(max_length=2,choices=choose_user,)
-    # fb_token=models.CharField(max_length=100)
-    # twitter_token=models.CharField(max_length=100)
-    # google_token=models.CharField(max_length=100)
-    # registration_method=models.BooleanField()
-    class Meta:
-        verbose_name="User"
-        verbose_name_plural="User"
 
+class CustomUser(AbstractUser):
+    pass
     def __str__(self):
-        return self.Firstname
+        return self.username
+
+# from django.contrib.auth.models import User
+
+# class User(models.Model):
+#     Firstname=models.CharField(max_length=45)
+#     Lastname=models.CharField(max_length=45)
+#     email=models.EmailField()
+#     password=models.CharField(max_length=45)
+#     status=models.BooleanField()
+#     created_date=models.DateTimeField(auto_now_add=True)
+#     Manager="M"
+#     Customer="C"
+#     Admin="A"
+#     choose_user=[(Manager,"Manager"),(Customer,"Customer"),(Admin,"Admin")]
+#     field = models.ForeignKey(Group,on_delete=models.CASCADE,related_name="user_group")
+#     user=models.CharField(max_length=2,choices=choose_user,)
+#     fb_token=models.CharField(max_length=100)
+#     twitter_token=models.CharField(max_length=100)
+#     google_token=models.CharField(max_length=100)
+#     registration_method=models.BooleanField()
+#     class Meta:
+#         verbose_name="User"
+#         verbose_name_plural="User"
+
+#     def __str__(self):
+#         return self.Firstname
 
 class Configuration(models.Model):
     conf_key=models.CharField(max_length=45)
@@ -97,9 +104,9 @@ class Contacts(models.Model):
 class Category(models.Model):
     name=models.CharField(max_length=100)
     parent_id=models.ForeignKey("self",null=True,blank=True,on_delete=models.CASCADE)
-    created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_create_by')
+    created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_create_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_modified_by')
+    modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Category_modified_by')
     modify_date=models.DateTimeField(auto_now=True)
     modify_status=models.BooleanField()
     class Meta:
@@ -124,10 +131,10 @@ class Products(models.Model):
       meta_desc=models.TextField()
       meta_keywords=models.TextField()
       #created_by=models.IntegerField(default=1)
-      created_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Products_created_by')
+      created_by = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Products_created_by')
       created_date=models.DateTimeField(auto_now_add=True)
       #modify_by=models.IntegerField(default=1)
-      modify_by = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='Products_modify_by')
+      modify_by = models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='Products_modify_by')
       modify_date=models.DateTimeField(auto_now=True)
       is_featured=models.BooleanField()
       class Meta:
@@ -152,9 +159,9 @@ class ProductsCategory(models.Model):
 class ProductsImages(models.Model):
     image=models.ImageField(upload_to='Product_Images',default="")
     modify_status=models.BooleanField()
-    created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_created_by')
+    created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_modify_by')
+    modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_modify_by')
     modify_date=models.DateTimeField(auto_now=True)
     product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
     class Meta:
@@ -165,9 +172,9 @@ class ProductsImages(models.Model):
 
 class ProductAttributes(models.Model):
      name=models.CharField(max_length=45)
-     created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductAttributes_created_by')
+     created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductAttributes_created_by')
      created_date=models.DateTimeField(auto_now_add=True)
-     modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductAttributes_modify_by')
+     modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductAttributes_modify_by')
      modify_date=models.DateTimeField(auto_now=True)
      class Meta:
         verbose_name="ProductAttributes"
@@ -180,9 +187,9 @@ class ProductAttributes(models.Model):
 class ProductsAttributesValues(models.Model):
     product_attribute=models.ForeignKey(ProductAttributes, on_delete=models.CASCADE)
     attribute_value=models.CharField(max_length=45)
-    created_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_created_by')
+    created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_modify_by')
+    modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsAttributesValues_modify_by')
     modify_date=models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name="ProductAttributesValues"
@@ -203,14 +210,14 @@ class ProductsAsscos(models.Model):
 
     
 class UserWishList(models.Model):
-    user_id=models.ForeignKey(User,on_delete=models.CASCADE)
+    user_id=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     product_id=models.IntegerField()
     class Meta:
         verbose_name="UserWishList"
         verbose_name_plural="UserWishList"
     
 class UserAddress(models.Model):
-    user_id=models.ForeignKey(User,on_delete=models.CASCADE)
+    user_id=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     address_1=models.CharField(max_length=100)
     address_2=models.CharField(max_length=100)
     city=models.CharField(max_length=45)
@@ -266,7 +273,7 @@ class OrderDetails(models.Model):
 
 
 class UserOrder(models.Model):
-    user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     shipping_method = models.IntegerField()
     AWB_NO =models.CharField(max_length=100)
     payment_gateway = models.ForeignKey(PaymentGateway,on_delete=models.CASCADE)
@@ -292,6 +299,8 @@ class UserOrder(models.Model):
     class Meta:
         verbose_name = "UserOrder"
         verbose_name_plural = "UserOrder"
+
+
 
 
 

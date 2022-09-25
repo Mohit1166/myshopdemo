@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'custom_admin',
-    'rest_framework'
+    
 ]
-
+AUTH_USER_MODEL = "custom_admin.CustomUser" 
 
 
 MIDDLEWARE = [
@@ -81,11 +81,12 @@ WSGI_APPLICATION = 'shopcart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'ecommerce_shopify',
+        'NAME':'Ecommerce',
         'HOST': 'localhost',
         'USER':'root',
         'PASSWORD':'p@ssw0rd',
         'PORT':'3306',
+        
     
     #    'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3'

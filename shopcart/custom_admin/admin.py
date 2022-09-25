@@ -1,7 +1,9 @@
 # from csv import list_dialects
 # from email.headerregistry import Address
 from django.contrib import admin
-from custom_admin.models import Configuration, Cms, Banners,Email,Contacts,Category,Products,ProductsCategory,ProductsImages,ProductAttributes,ProductsAttributesValues,User,UserWishList,UserAddress,Coupons,CouponsUsed,ProductsAsscos,PaymentGateway,UserOrder,OrderDetails
+from django.contrib.auth.admin import UserAdmin
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from custom_admin.models import Configuration, Cms, Banners,Email,Contacts,Category,Products,ProductsCategory,ProductsImages,ProductAttributes,ProductsAttributesValues,UserWishList,UserAddress,Coupons,CouponsUsed,ProductsAsscos,PaymentGateway,UserOrder,OrderDetails,CustomUser
 
 
 class configuration_admin(admin.ModelAdmin):
@@ -55,9 +57,9 @@ class ProductsAttributesValuesAdmin(admin.ModelAdmin):
                   "modify_date")
 admin.site.register(ProductsAttributesValues,ProductsAttributesValuesAdmin)
 
-class UserAdmin(admin.ModelAdmin):
-    list_display=("Firstname","Lastname","email","password","status","created_date","user")
-admin.site.register(User,UserAdmin)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display=("Firstname","Lastname","email","password","status","created_date","user")
+# admin.site.register(User,UserAdmin)
 
 class UserWishListAdmin(admin.ModelAdmin):
     list_display=("user_id","product_id")
@@ -94,3 +96,12 @@ admin.site.register(UserOrder,UserOrderAdmin)
 class OrderDetailsAdmin(admin.ModelAdmin):
     list_display = ('order_id','product_id','quantity','amount')
 admin.site.register(OrderDetails,OrderDetailsAdmin)
+
+
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = ["email", "username",]
+
+admin.site.register(CustomUser, CustomUserAdmin)

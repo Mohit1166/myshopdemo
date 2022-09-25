@@ -1,6 +1,7 @@
 from dataclasses import field
 from django import forms
 from custom_admin.models import *
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class BannersForm(forms.ModelForm):  
     class Meta:  
@@ -63,10 +64,10 @@ class ProductsAsscosForm(forms.ModelForm):
         model =ProductsAsscos
         fields = "__all__"
 
-class UserForm(forms.ModelForm):  
-    class Meta:  
-        model =User
-        fields = "__all__"
+# class UserForm(forms.ModelForm):  
+#     class Meta:  
+#         model =User
+#         fields = "__all__"
 
 class UserWishListForm(forms.ModelForm):  
     class Meta:  
@@ -103,3 +104,14 @@ class UserOrderForm(forms.ModelForm):
         model =UserOrder
         fields = "__all__"
 
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ("username", "email")
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ("username", "email")
