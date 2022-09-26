@@ -36,8 +36,8 @@ class CategoryForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):  
     class Meta:  
         model =Products
-        #fields= ['name','sku','short_description','long_description','price','modify_status','quantity','meta_title','meta_desc','meta_keywords','is_featured']
-        fields="__all__"
+        fields= ['name','sku','short_description','long_description','price','quantity','meta_title','meta_desc','meta_keywords','is_featured']
+        # fields="__all__"
        
 class ProductCategorysForm(forms.ModelForm):  
     class Meta:  
@@ -47,12 +47,12 @@ class ProductCategorysForm(forms.ModelForm):
 class ProductImagesForm(forms.ModelForm):  
     class Meta:  
         model =ProductsImages
-        fields = "__all__"
+        fields = ["image","product_id"]
 
 class ProductAttributesForm(forms.ModelForm):  
     class Meta:  
         model =ProductAttributes
-        fields = "__all__"
+        fields = ["name"]
 
 class ProductValuesForm(forms.ModelForm):  
     class Meta:  
@@ -62,7 +62,7 @@ class ProductValuesForm(forms.ModelForm):
 class ProductsAsscosForm(forms.ModelForm):  
     class Meta:  
         model =ProductsAsscos
-        fields = "__all__"
+        fields = ["Products_attri_id","Products_value_attri"]
 
 # class UserForm(forms.ModelForm):  
 #     class Meta:  

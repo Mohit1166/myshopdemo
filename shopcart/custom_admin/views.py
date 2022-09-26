@@ -233,11 +233,10 @@ class Categorys(View):
           
             obj=CategoryForm(request.POST)
             if obj.is_valid():
-                  form_instance=obj.save(commit=False)
-                  print(f"request.user:{request.user}")
-                  form_instance.created_by=request.user
-                  form_instance.modify_by=request.user
-                  form_instance.save()
+                  instance=obj.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
                   return redirect('custom_admin:category')
             else:
                   return render(request,"category_form.html",{'form':obj})
@@ -284,24 +283,23 @@ class ProductShop(View):
             productimg=ProductImagesForm(request.POST,request.FILES)
             productassociation=ProductsAsscosForm(request.POST)
             if product.is_valid() and productassociation.is_valid() and productimg.is_valid():
-                  var_product = product.save()
-                  # var_product.created_by=request.user.id
-                  var_product.created_date=timezone.now()
-                  # var_product.modify_by=request.user.id
-                  var_product.modify_date=timezone.now()
-                  var_product.save()
+                  instance = product.save()
+                  instance.created_by=request.user
+                  # instance.created_date=timezone.now()
+                  instance.modify_by=request.user
+                  # instance.modify_date=timezone.now()
+                  instance.save()
                   for file,stat in zip(request.FILES.getlist('productimg-image'),request.POST.getlist('productimg-modify_status')):
                         name=file
-                        var_photo=ProductsImages(product_id=product,image=name,
-                                                 created_date=timezone.now(),
-                                                 modify_date=timezone.now(),
-                                                 modify_status=stat
-                                                 )
+                        var_photo=ProductsImages(product_id=instance,image=name,
+                                                 created_by=request.user,
+                                                 modify_by=request.user,
+                                                 modify_status=stat)
                         var_photo.save()
                   for attr,val in zip(request.POST.getlist('productassociation-Products_attri_id'),request.POST.getlist('productassociation-Products_value_attri')):
                         attr_=ProductAttributes.objects.get(id=attr)
                         val_=ProductsAttributesValues.objects.get(id=val)
-                        attr_assc=ProductsAsscos(Product_id=product,
+                        attr_assc=ProductsAsscos(Product_id=instance,
                                                 Products_attri_id=attr_,
                                                 Products_value_attri=val_
                                                                            )
@@ -309,15 +307,14 @@ class ProductShop(View):
 
                   return redirect('custom_admin:products')
             else:
-                  # product=ProductForm()
-                  # productimg=ProductImagesForm()
-                  # productassociation=ProductsAsscosForm()
+                  product=ProductForm()
+                  productimg=ProductImagesForm()
+                  productassociation=ProductsAsscosForm()
                   return render(request,"main_form.html",{"form":product,"form1":productimg,"form2":productassociation})
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
 def productscheck(request):
       obj=Products.objects.all()
-     
       keys={"obj":obj}
       return render(request,"products.html",keys)
 
@@ -420,7 +417,11 @@ class Productimage(View):
       def post(self,request):
             obj=ProductImagesForm(request.POST,request.FILES)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
+                  
                   return redirect('custom_admin:productsimages')
             else:
                   return render(request,"productimg_form.html",{'form':obj})
@@ -468,7 +469,10 @@ class Productattribute(View):
       def post(self,request):
             obj=ProductAttributesForm(request.POST)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
                   return redirect('custom_admin:productattribute')
             else:
                   return render(request,"attributes_form.html",{'form':obj})
@@ -514,7 +518,10 @@ class ProductValues(View):
       def post(self,request):
             obj=ProductValuesForm(request.POST,request.FILES)
             if obj.is_valid():
-                  obj.save()
+                  instance=obj.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
                   return redirect('custom_admin:productvalue')
             else:
                   return render(request,"productvalues_form.html",{'form':obj})
@@ -545,7 +552,11 @@ class ProductValueEdit(View):
             cat=ProductsAttributesValues.objects.get(id=id)
             fm=ProductValuesForm(request.POST ,instance=cat)
             if fm.is_valid():
-                  fm.save()
+                  instance=fm.save()
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
+                  
                   return redirect('custom_admin:productvalue')
 
 

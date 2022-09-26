@@ -1,5 +1,7 @@
 
 
+from pickle import TRUE
+import re
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import Group
@@ -122,10 +124,10 @@ class Products(models.Model):
       short_description=models.CharField(max_length=100)
       long_description=models.TextField()
       price=models.FloatField()
-      special_price=models.FloatField()
-      from_special_price=models.DateTimeField(auto_now_add=True)
-      to_special_price=models.DateTimeField(auto_now_add=True)
-      modify_status=models.BooleanField()
+      special_price=models.FloatField(null=True,blank=True)
+      from_special_price=models.DateTimeField(auto_now_add=True,null=True,blank=True)
+      to_special_price=models.DateTimeField(auto_now_add=True,null=True,blank=True)
+      modify_status=models.BooleanField(null=True,blank=True)
       quantity=models.IntegerField()
       meta_title=models.CharField(max_length=45)   
       meta_desc=models.TextField()
@@ -158,12 +160,12 @@ class ProductsCategory(models.Model):
 
 class ProductsImages(models.Model):
     image=models.ImageField(upload_to='Product_Images',default="")
-    modify_status=models.BooleanField()
+    modify_status=models.BooleanField(blank=True,null=True)
     created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
     modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='ProductsImages_modify_by')
     modify_date=models.DateTimeField(auto_now=True)
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True,null=True)
     class Meta:
         verbose_name="ProductsImages"
         verbose_name_plural="ProductsImages"
@@ -199,14 +201,12 @@ class ProductsAttributesValues(models.Model):
         return self.attribute_value
 
 class ProductsAsscos(models.Model):
-    Product_id=models.ForeignKey(Products,on_delete=models.CASCADE,blank=True)
+    Product_id=models.ForeignKey(Products,on_delete=models.CASCADE,blank=True,null=True)
     Products_attri_id=models.ForeignKey(ProductAttributes,on_delete=models.CASCADE)
-    Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE,blank=True)
+    Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE,blank=True,null=True)
     class Meta:
         verbose_name="ProductsAsscos"
         verbose_name_plural="ProductsAsscos"
-
-
 
     
 class UserWishList(models.Model):

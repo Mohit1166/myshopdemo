@@ -31,10 +31,10 @@
                                     <th>short_description</th>
                                     <th>long_description</th>
                                     <th>price</th>
-                                    <th>special_price</th>
+                                    <!-- <th>special_price</th>
                                     <th>from_special_price</th>
                                     <th>to_special_price</th>
-                                    <th>modify_status</th>
+                                    <th>modify_status</th> -->
                                     <th>quantity</th>
                                     <th>meta_title</th>
                                     <th>meta_desc</th>
@@ -50,7 +50,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 {% for i in obj %}
+                               
                                 <tr>
                                     
                                     <td>{{i.name}}</td>
@@ -58,10 +60,10 @@
                                     <td>{{i.short_description}}</td>
                                     <td>{{i.long_description}}</td>
                                     <td>{{i.price}}</td>
-                                    <td>{{i.special_price}}</td>
+                                    <!-- <td>{{i.special_price}}</td>
                                     <td>{{i.from_special_price}}</td>
                                     <td>{{i.to_special_price}}</td>
-                                    <td>{{i.modify_status}}</td>
+                                    <td>{{i.modify_status}}</td> -->
                                     <td>{{i.quantity}}</td>
                                     <td>{{i.meta_title}}</td>
                                     <td>{{i.meta_desc}}</td>
@@ -71,19 +73,26 @@
                                     <td>{{i.modify_by}}</td>
                                     <td>{{i.modify_date}}</td>
                                      <td>{{i.is_featured}}</td>
+                                     
                                     
-                                    {% if i.image %}
+                                 
+                                    {% if i.productsimages_set.first.image.url %}
                                     <td>
-                                        <img src="{{i.image.url}}" alt="" height="50px" width="50px">
+                                        <img src="{{ i.productsimages_set.first.image.url }}" alt="" height="50px" width="50px">
                                     
                                     </td>
+                                    
                                     {% else %}
+                                   
+
                                     <td>
                                         <img src="SHOPPING_CART/shopcart/media/Product_Images/" alt="" height="50px" width="50px">
                                         
 
                                     </td>
                                     {% endif %}
+                                   
+                                   
                                     
                                     <td>
 
