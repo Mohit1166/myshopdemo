@@ -251,9 +251,9 @@ class CouponsUsed(models.Model):
 
 class PaymentGateway(models.Model):
     name=models.CharField(max_length=45)
-    created_by=models.IntegerField()
+    created_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='PaymentGateway_created_by')
     created_date=models.DateTimeField(auto_now_add=True)
-    modify_by=models.IntegerField()
+    modify_by=models.ForeignKey(CustomUser,on_delete=models.SET_NULL,null=True,blank=True,related_name='PaymentGateway_modify_by')
     modify_date=models.DateTimeField(auto_now=True)
     class Meta:
 

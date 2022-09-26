@@ -17,8 +17,8 @@
         "model":"custom_admin.Coupons",
         "pk":2,
         "fields":{
-            "Code":"AABBCF43ERT",
-            "percent":10.00,
+            "Code":"TREDDF2345R",
+            "percent":20.00,
             "created_by":1,
             "created_date":	"2022-02-11 13:23:04",
             "modify_by":1,

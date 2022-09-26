@@ -711,23 +711,23 @@ def couponsusedcheck(request):
 
 
 #For PaymentGateway
-class PaymentGateway(View):
+class Payment(View):
      
       def get(self,request):
-            obj=PaymentGatewayForm
+            obj=PaymentGatewayForm()
             return render(request,"payment.html",{'form':obj})
 
 
       def post(self,request):
-            obj=PaymentGatewayForm(request.POST,request.FILES)
+            obj=PaymentGatewayForm(request.POST)
             if obj.is_valid():
                   instance=obj.save()
-                  print(instance.banner_path.path)
-                 
-                  return redirect('custom_admin:payment')
+                  instance.created_by=request.user
+                  instance.modify_by=request.user
+                  instance.save()
+                  return redirect('custom_admin:payment_form')
             else:
-                  return render(request,"payment_form.html",{'form':obj})
-
+                  return render(request,"payment.html",{'form':obj})
 
 
 @login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
