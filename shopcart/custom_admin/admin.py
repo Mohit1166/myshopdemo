@@ -78,7 +78,7 @@ class CouponsUsedAdmin(admin.ModelAdmin):
 admin.site.register(CouponsUsed,CouponsUsedAdmin) 
 
 class ProductsAsscosAdmin(admin.ModelAdmin):
-    list_display=("Product_id","Products_attri_id","Products_value_attri")
+    list_display=("Product_id","Products_attri_id","Products_value_attri_id")
 admin.site.register(ProductsAsscos,ProductsAsscosAdmin) 
 
 class PaymentGatewayAdmin(admin.ModelAdmin):

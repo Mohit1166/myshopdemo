@@ -22,7 +22,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    
+
                                     <!-- <th>modify_status</th> -->
                                     <th>modify_by</th>
                                     <th>created_by</th>
@@ -30,14 +30,14 @@
                                     <th>modify_date</th>
                                     <th>product_id</th>
                                     <th>image</th>
-                                     <th>Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for i in obj %}
                                 <tr>
-                                    
-                                    
+
+
                                     <!-- <td>{{i.modify_status}}</td> -->
                                     <td>{{i.modify_by}}</td>
                                     <td>{{i.created_by}}</td>
@@ -49,10 +49,16 @@
                                     <td>
                                         <img src="{{i.image.url}}" alt="" height="50px" ;width="50px">
                                     </td>
-                                 
-                                  
+                                    {% else %}
+
+                                    <td>
+                                        <img src="SHOPPING_CART/shopcart/media/Product_Images/" alt="" height="50px"
+                                            width="50px">
+                                    </td>
+
+
                                     {% endif %}
-                                   
+
                                     <td>
 
                                         <button type="submit" value="Delete" class="btn btn-default btn-sm"

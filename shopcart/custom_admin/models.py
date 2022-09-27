@@ -1,5 +1,6 @@
 
 
+from enum import auto
 from pickle import TRUE
 import re
 from django.contrib.auth.models import AbstractUser
@@ -203,7 +204,7 @@ class ProductsAttributesValues(models.Model):
 class ProductsAsscos(models.Model):
     Product_id=models.ForeignKey(Products,on_delete=models.CASCADE,blank=True,null=True)
     Products_attri_id=models.ForeignKey(ProductAttributes,on_delete=models.CASCADE)
-    Products_value_attri=models.ForeignKey("self",on_delete=models.CASCADE,blank=True,null=True)
+    Products_value_attri_id=models.ForeignKey(ProductsAttributesValues, on_delete=models.CASCADE,blank=True,null=True)
     class Meta:
         verbose_name="ProductsAsscos"
         verbose_name_plural="ProductsAsscos"

@@ -10,7 +10,7 @@
                         <div class="col-sm-12" style="position: relative;left: 7px;">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item "><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Product  </li>
+                                <li class="breadcrumb-item active">Product </li>
                             </ol>
                         </div>
                         <br>
@@ -22,125 +22,104 @@
                         </form>
 
                         <div class="card-body" style="width:100%; overflow: scroll;">
-                        <table class="table table-bordered table-hover" style="width:2000px;">
-                            <thead>
-                                <tr>
-                                    <th>name</th>
-                                    <th>sku</th>
-                                    <!-- <th>image</th> -->
-                                    <th>short_description</th>
-                                    <th>long_description</th>
-                                    <th>price</th>
-                                    <!-- <th>special_price</th>
-                                    <th>from_special_price</th>
-                                    <th>to_special_price</th>
-                                    <th>modify_status</th> -->
-                                    <th>quantity</th>
-                                    <th>meta_title</th>
-                                    <th>meta_desc</th>
-                                    <th>meta_keywords</th>
-                                    <th>created_by</th>
-                                    <th>created_date</th>
-                                    <th>modify_by</th>
-                                    <th>modify_date</th>
-                                    <th>is_featured</th>
-                                    <th>image</th>
-                                    <th>Action</th>
-                                     <!-- <th>Action</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                {% for i in obj %}
-                               
-                                <tr>
-                                    
-                                    <td>{{i.name}}</td>
-                                    <td>{{i.sku}}</td>
-                                    <td>{{i.short_description}}</td>
-                                    <td>{{i.long_description}}</td>
-                                    <td>{{i.price}}</td>
-                                    <!-- <td>{{i.special_price}}</td>
+                            <table class="table table-bordered table-hover" style="width:2000px;">
+                                <thead>
+                                    <tr>
+                                        <th>name</th>
+                                        <th>sku</th>
+                                        <!-- <th>image</th> -->
+                                        <th>short_description</th>
+                                        <th>long_description</th>
+                                        <th>price</th>
+                                        <!-- <th>special_price</th> -->
+                                    <!-- <th>from_special_price</th>
+                                    <th>to_special_price</th> -->
+                                    <th>modify_status</th>
+                                        <th>quantity</th>
+                                        <th>meta_title</th>
+                                        <th>meta_desc</th>
+                                        <th>meta_keywords</th>
+                                        <th>created_by</th>
+                                        <th>created_date</th>
+                                        <th>modify_by</th>
+                                        <th>modify_date</th>
+                                        <th>is_featured</th>
+                                        <!-- <th>image</th> -->
+                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for i in obj %}
+
+                                    <tr>
+
+                                        <td>{{i.name}}</td>
+                                        <td>{{i.sku}}</td>
+                                        <td>{{i.short_description}}</td>
+                                        <td>{{i.long_description}}</td>
+                                        <td>{{i.price}}</td>
+                                        <!-- <td>{{i.special_price}}</td>
                                     <td>{{i.from_special_price}}</td>
-                                    <td>{{i.to_special_price}}</td>
-                                    <td>{{i.modify_status}}</td> -->
-                                    <td>{{i.quantity}}</td>
-                                    <td>{{i.meta_title}}</td>
-                                    <td>{{i.meta_desc}}</td>
-                                    <td>{{i.meta_keywords}}</td>
-                                    <td>{{i.created_by}}</td>
-                                    <td>{{i.created_date}}</td>
-                                    <td>{{i.modify_by}}</td>
-                                    <td>{{i.modify_date}}</td>
-                                     <td>{{i.is_featured}}</td>
-                                     
-                                    
-                                 
-                                    {% if i.productsimages_set.first.image.url %}
-                                    <td>
-                                        <img src="{{ i.productsimages_set.first.image.url }}" alt="" height="50px" width="50px">
-                                    
-                                    </td>
-                                    
-                                    {% else %}
-                                   
+                                    <td>{{i.to_special_price}}</td> -->
+                                    <td>{{i.modify_status}}</td>
+                                        <td>{{i.quantity}}</td>
+                                        <td>{{i.meta_title}}</td>
+                                        <td>{{i.meta_desc}}</td>
+                                        <td>{{i.meta_keywords}}</td>
+                                        <td>{{i.created_by}}</td>
+                                        <td>{{i.created_date}}</td>
+                                        <td>{{i.modify_by}}</td>
+                                        <td>{{i.modify_date}}</td>
+                                        <td>{{i.is_featured}}</td>
+                                        <td>
 
-                                    <td>
-                                        <img src="SHOPPING_CART/shopcart/media/Product_Images/" alt="" height="50px" width="50px">
-                                        
+                                            <button type="submit" value="Delete" class="btn btn-default btn-sm"
+                                                data-toggle="modal" data-target="#deletemodal"
+                                                style="color: black; background-color: red;">
+                                                Delete
+                                            </button>
 
-                                    </td>
-                                    {% endif %}
-                                   
-                                   
-                                    
-                                    <td>
-
-                                        <button type="submit" value="Delete" class="btn btn-default btn-sm"
-                                            data-toggle="modal" data-target="#deletemodal"
-                                            style="color: black; background-color: red;">
-                                            Delete
-                                        </button>
-
-                                        <div class="modal fade" id="deletemodal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <!-- <h4 class="modal-title">User You are Deleting Something</h4> -->
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <form action="{% url 'custom_admin:product_delete' %}"
-                                                        method="POST">
-                                                        {% csrf_token %}
-
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="id" value={{i.id}}>
-                                                            <h4> Are you Sure You Want To Delete ??</h4>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary">Yes Delete
-                                                                it!!
+                                            <div class="modal fade" id="deletemodal">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <!-- <h4 class="modal-title">User You are Deleting Something</h4> -->
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
+
+                                                        <form action="{% url 'custom_admin:product_delete' %}"
+                                                            method="POST">
+                                                            {% csrf_token %}
+
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="id" value={{i.id}}>
+                                                                <h4> Are you Sure You Want To Delete ??</h4>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Yes Delete
+                                                                    it!!
+                                                                </button>
+                                                            </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <a href="{% url 'custom_admin:productedit' i.id %}"
-                                            class="btn btn-default btn-sm fas fa-edit"></a>
+                                            <a href="{% url 'custom_admin:productedit' i.id %}"
+                                                class="btn btn-default btn-sm fas fa-edit"></a>
 
-                                        </form>
-                                    </div>
+                                            </form>
+                        </div>
 
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
                         </table>
                     </div>
                 </div>
