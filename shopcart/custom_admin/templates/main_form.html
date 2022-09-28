@@ -105,12 +105,14 @@
                                     <div class="form-check">
                                         <label class="form-check-label" for="is_featured">is_featured</label>
                                         {{ form.is_featured }}
+                                    </div>
 
                                         <div class="card-body">
                                             <div class="form-group prod-image">
                                                 <label for="image">image</label>
                                                 {{ form1.image }}
-                                                <button type="button" id="addMoreImage" class="fa fa-plus">Add Image</button>
+                                                <button type="button" id="addMoreImage" class="fa fa-plus">Add
+                                                    Image</button>
 
 
                                             </div>
@@ -143,7 +145,7 @@
                                             {{ form2.Product_id }}
                                         </div> -->
 
-                                        <div class="form-group">
+                                        <div class="form-group product-attribute">
                                             <label for="Products_attri_id"> Products_attri_id</label>
                                             {{ form2.Products_attri_id }}
                                         </div>
@@ -194,20 +196,27 @@
     }
 </script>
 <script>
-    
+
     $("#addMoreImage").click(function () {
         $('.prod-image').append(
-            '<div class="form-group prod-image">' +
+            '<div class="form-group imageField">' +
             '<input name="image"  type="file">' +
             '<button type="button" class="removeQuatationBtn"><i class="fa fa-trash"></i></button>' +
             '</div>'
         );
     });
-    $(".prod-image").on("click", ".removeQuatationBtn", function (e) {
-        $(this).parents("#imageField").remove();
-      
+    $(".prod-image").on("click", ".removeQuatationBtn", function () {
+        $(this).parents(".imageField").remove();
+
     });
 
+    // $(".prod-image").on('click', '#delete', function () {
+    //     $(this).parent().remove();
+    // });
+
+</script>
+<script>
+   
 </script>
 
 {% endblock %}
