@@ -1,4 +1,5 @@
 {% extends 'starter.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 {% block content %}
 <div class="content-wrapper">
@@ -44,7 +45,7 @@
                                     <label for="sku">sku</label>
                                     {{ form.sku }}
                                 </div>
-                              
+
                                 <div class="form-group">
                                     <label for="short_description">short_description</label>
                                     {{ form.short_description }}
@@ -60,11 +61,11 @@
                                 <div class="form-check">
                                     <label class="form-check-label" for="is_featured">is_featured</label>
                                     {{ form.is_featured }}
-                                <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                     <label for="special_price">special_price</label>
                                     {{ form.special_price }}
                                 </div> -->
-                                <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                     <label for="from_special_price">from_special_price</label>
                                     {{ form.from_special_price }}
                                 </div>
@@ -72,28 +73,28 @@
                                     <label for="to_special_price">to_special_price</label>
                                     {{ form.to_special_price }}
                                 </div> -->
-                                <!-- <div class="form-check">
+                                    <!-- <div class="form-check">
                                     <label class="form-check-label" for="modify_status">modify_status</label>
                                     {{ form.modify_status }}
                                 </div> -->
-                                <div class="form-group">
-                                    <label for="quantity">quantity</label>
-                                    {{ form.quantity }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="meta_title">meta_title</label>
-                                    {{ form.meta_title }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="meta_desc">meta_desc</label>
-                                    {{ form.meta_desc }}
-                                </div>
-                                <div class="form-group">
-                                    <label for="meta_keywords">meta_keywords</label>
-                                    {{ form.meta_keywords }}
-                                </div>
-                                
-                                <!-- <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="quantity">quantity</label>
+                                        {{ form.quantity }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meta_title">meta_title</label>
+                                        {{ form.meta_title }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meta_desc">meta_desc</label>
+                                        {{ form.meta_desc }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meta_keywords">meta_keywords</label>
+                                        {{ form.meta_keywords }}
+                                    </div>
+
+                                    <!-- <div class="form-group">
                                     <label for="modify_by">modify_by</label>
                                     {{ form.modify_by }}
                                 </div>
@@ -101,16 +102,19 @@
                                     <label for="created_by">created_by</label>
                                     {{ form.created_by }}
                                 </div> -->
-                                <div class="form-check">
-                                    <label class="form-check-label" for="is_featured">is_featured</label>
-                                    {{ form.is_featured }}
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="is_featured">is_featured</label>
+                                        {{ form.is_featured }}
 
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="image">image</label>
-                                            {{ form1.image }}
-                                        </div>
-                                        <!-- <div class="form-group">
+                                        <div class="card-body">
+                                            <div class="form-group prod-image">
+                                                <label for="image">image</label>
+                                                {{ form1.image }}
+                                                <button type="button" id="addMoreImage" class="fa fa-plus">Add Image</button>
+
+
+                                            </div>
+                                            <!-- <div class="form-group">
                                             <label for="modify_status">modify_status</label>
                                             {{ form1.modify_status }} -->
                                         </div>
@@ -164,7 +168,7 @@
                                             <label for="modify_date">modify_date</label>
                                             {{ form2.modify_date }}
                                         </div> -->
-                                         <div class="card-footer">
+                                        <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                         </form>
@@ -188,6 +192,22 @@
         $(".nav-link").removeClass("active")
         $(".products-menu").addClass("active")
     }
+</script>
+<script>
+    
+    $("#addMoreImage").click(function () {
+        $('.prod-image').append(
+            '<div class="form-group prod-image">' +
+            '<input name="image"  type="file">' +
+            '<button type="button" class="removeQuatationBtn"><i class="fa fa-trash"></i></button>' +
+            '</div>'
+        );
+    });
+    $(".prod-image").on("click", ".removeQuatationBtn", function (e) {
+        $(this).parents("#imageField").remove();
+      
+    });
+
 </script>
 
 {% endblock %}

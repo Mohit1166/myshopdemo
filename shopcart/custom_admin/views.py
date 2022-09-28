@@ -284,9 +284,6 @@ class CategoryEdit(View):
 
 
 class ProductShop(View):
-
-
-
     def get(self, request):
         product = ProductForm()
         productimg = ProductImagesForm()
@@ -305,6 +302,7 @@ class ProductShop(View):
             instance.save()
             
             for file in request.FILES.getlist('image'):
+                
                 name = file
                 var_photo = ProductsImages(product_id=instance, image=name,
                                            created_by=request.user,
@@ -312,7 +310,8 @@ class ProductShop(View):
                                            modify_status=True)
                                     
                 var_photo.save()
-            for attr, val in request.POST.getlist('productassociation-Products_value_attri_id'):
+            
+            for attr, val in  zip( request.POST.getlist ('Products_attri_id'),request.POST.getlist('Products_value_attri_id')):
                 attr_ = ProductAttributes.objects.get(id=attr)
                 val_ = ProductsAttributesValues.objects.get(id=val)
                 attr_assc = ProductsAsscos(Product_id=instance,
