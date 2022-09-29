@@ -14,7 +14,7 @@ from django.views.generic.list import ListView
 from custom_admin.models import *
 from django.utils.decorators import method_decorator
 # from custom_admin.models import Banners
-
+from django.http import JsonResponse
 
 def adminlogin(request):
     """_summary_
@@ -356,6 +356,9 @@ class ProductEdit(View):
         if fm.is_valid():
             fm.save()
             return redirect('custom_admin:products')
+
+
+   
 # For Main Product
 # class ProductAll(View):
 
@@ -548,6 +551,10 @@ def productvaluescheck(request):
     keys = {"obj": obj}
     return render(request, "productvalues.html", keys)
 
+def getAttributeValues(request):
+    product_attribute_id = request.GET.get('Products_attri_id')
+    product_attribute_value = ProductsAttributesValues.objects.filter(product_attribute_id=product_attribute_id).all()
+    return JsonResponse(list(product_attribute_value.values('id', 'attribute_value')), safe=False)
 
 class AttributeValueDelete(View):
     def post(self, request):

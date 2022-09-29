@@ -55,6 +55,7 @@ urlpatterns = [
     path("productvaluedelete/",views.AttributeValueDelete.as_view(),name="attribute_value_delete"), 
     path("productvalueedit/<int:id>/",views.ProductValueEdit.as_view(),name="product_value_edit"),
     path("productasscos/",views.ProductsAssociation.as_view(),name="productasscos_form"),
+    path("productdropdown",views.getAttributeValues,name="productdropdown"),
     path("productasscoscheck/",views.productasscoscheck,name="productasscos"),
     path("user/",views.User.as_view(),name="user"),
     path("usercheck/",views.usercheck,name="usercheck"),

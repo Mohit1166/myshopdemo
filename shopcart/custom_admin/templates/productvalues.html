@@ -16,6 +16,12 @@
                         <br>
 
                         <form action="{% url 'custom_admin:productvalue_form' %}">
+                            <option value="">---------</option>
+                            {% for Products_value_attri_id in Products_value_attri_id %}
+                            <option value="{{ Products_value_attri_id.pk }}">{{ Products_value_attri_id.attribute_value
+                                }}
+                            </option>
+                            {% endfor %}
                             <button type="submit" class="btn btn-sm btn-primary"
                                 style="float: right; width: 150px;">Add</button>
                         </form>
@@ -28,21 +34,21 @@
                                     <th>created_date</th>
                                     <th>modify_by</th>
                                     <th>modify_date</th>
-                                
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for i in obj %}
                                 <tr>
-                                    
+
                                     <td>{{i.product_attribute}}</td>
                                     <td>{{i.attribute_value}}</td>
                                     <td>{{i.created_by}}</td>
                                     <td>{{i.created_date}}</td>
                                     <td>{{i.modify_by}}</td>
                                     <td>{{i.modify_date}}</td>
-                                   
+
                                     <td>
 
                                         <button type="submit" value="Delete" class="btn btn-default btn-sm"
@@ -97,6 +103,7 @@
     </section>
 </div>
 {% endblock %}
+
 
 {% block script %}
 <script>

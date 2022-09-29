@@ -33,7 +33,9 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{% url 'custom_admin:products_form' %}" method="post"
+
+                        <form action="{% url 'custom_admin:products_form' %} " id="attri_form"
+                            attri-url="{% url 'custom_admin:productvalue' %}" method="post"
                             enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="card-body">
@@ -106,37 +108,36 @@
                                         <label class="form-check-label" for="is_featured">is_featured</label>
                                         {{ form.is_featured }}
                                     </div>
+                                    <div class="card-body">
+                                        <div class="form-group prod-image">
+                                            <label for="image">image</label>
+                                            {{ form1.image }}
+                                            <button type="button" id="addMoreImage" class="fa fa-plus">Add
+                                                Image</button>
 
-                                        <div class="card-body">
-                                            <div class="form-group prod-image">
-                                                <label for="image">image</label>
-                                                {{ form1.image }}
-                                                <button type="button" id="addMoreImage" class="fa fa-plus">Add
-                                                    Image</button>
 
-
-                                            </div>
-                                            <!-- <div class="form-group">
-                                            <label for="modify_status">modify_status</label>
-                                            {{ form1.modify_status }} -->
                                         </div>
                                         <!-- <div class="form-group">
+                                            <label for="modify_status">modify_status</label>
+                                            {{ form1.modify_status }} -->
+                                    </div>
+                                    <!-- <div class="form-group">
                                             <label for="created_by">created_by</label>
                                             {{ form1.created_by }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="created_date">created_date</label>
                                             {{ form1.created_date }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="modify_by">modify_by</label>
                                             {{ form1.modify_by }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="modify_date">modify_date</label>
                                             {{ form1.modify_date }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="product_id">product_id</label>
                                             {{ form1.product_id }}
                                         </div>
@@ -145,34 +146,35 @@
                                             {{ form2.Product_id }}
                                         </div> -->
 
-                                        <div class="form-group product-attribute">
-                                            <label for="Products_attri_id"> Products_attri_id</label>
-                                            {{ form2.Products_attri_id }}
-                                        </div>
+                                    <div class="form-group" id="product-attribute">
+                                        <label for="Products_attri_id" id="my_prod_attri">Products_attri_id</label>
+                                        {{ form2.Products_attri_id }}
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="Products_value_attri_id"> Products_value_attri_id</label>
-                                            {{ form2.Products_value_attri_id }}
-                                        </div>
-                                        <!-- <div class="form-group">
+
+                                    <div class="form-group product-value">
+                                        <label for="Products_value_attri_id"> Products_value_attri_id</label>
+                                        {{ form2.Products_value_attri_id }}
+                                    </div>
+                                    <!-- <div class="form-group">
                                             <label for="created_by">created_by</label>
                                             {{ form2.created_by }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="created_date">created_date</label>
                                             {{ form2.created_date }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="modify_by">modify_by</label>
                                             {{ form2.modify_by }}
                                         </div> -->
-                                        <!-- <div class="form-group">
+                                    <!-- <div class="form-group">
                                             <label for="modify_date">modify_date</label>
                                             {{ form2.modify_date }}
                                         </div> -->
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                         </form>
                     </div>
                 </div>
@@ -216,7 +218,31 @@
 
 </script>
 <script>
-   
+
+
+    
+
+    $('#id_Products_attri_id').change(function () {
+        const url = $("#attri_form").attr("attri-url");
+        const Products_attri_idId= $(this).val();
+        $.ajax({
+           
+            url:"{% url 'custom_admin:productdropdown' %}",
+            data: {
+                 'Products_attri_id':Products_attri_idId
+            },
+           
+            success: function (data) {
+               
+               let option_drop = '<option value="">-----------</option>';
+               data.forEach(function(Products_value_attri_id){
+                option_drop += `<option value="${Products_value_attri_id.id}">${Products_value_attri_id.attribute_value}</option>`
+               });
+               $("#id_Products_value_attri_id").html(option_drop);
+
+            }
+        });
+    });
 </script>
 
 {% endblock %}

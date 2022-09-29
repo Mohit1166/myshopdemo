@@ -63,6 +63,18 @@ class ProductsAsscosForm(forms.ModelForm):
     class Meta:  
         model =ProductsAsscos
         fields = ["Products_attri_id", "Products_value_attri_id"]
+        
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['Products_value_attri_id'].queryset = ProductsAttributesValues.objects.none()
+            if 'Products_attri_id' in self.data:
+                try:
+                    product_attribute_id = int(self.data.get('Products_attri_id'))
+                    self.fields['Products_value_attri_id'].queryset = ProductsAttributesValues.objects.filter(product_attribute_id=product_attribute_id).order_by('name')
+                except (ValueError, TypeError):
+                    pass 
+            elif self.instance.pk:
+                self.fields['Products_value_attri_id'].queryset = self.instance.Products_value_attri_id_set.order_by('name')
 
 # class UserForm(forms.ModelForm):  
 #     class Meta:  
