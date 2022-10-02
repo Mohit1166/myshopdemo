@@ -19,7 +19,3 @@ def registration(request):
     else:
         form=UserRegisterForm()
     return render (request,"forlogin/mylogin.html",{"form":form})
-
-
-def some(request):
-    return render(request,'myindex.html')
