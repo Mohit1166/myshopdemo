@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django import views
 from django.urls import path,include
-from custom_admin import views
+
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
@@ -27,11 +27,10 @@ from django.conf.urls.static import static
 admin.site.site_header="Developers_Account"
 admin.site.site_title="CustomisePanel"
 urlpatterns = [
-    path("start/",views.start, name="start"),
+    # path("start/",views.start, name="start"),
     path("admin/",admin.site.urls),
     path('adminpanel/', include("custom_admin.urls")),
-    
-   
+    path('', include("M_Shopify.urls"))   
      ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

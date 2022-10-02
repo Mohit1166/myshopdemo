@@ -1,7 +1,7 @@
-import imghdr
+
 from django.contrib import admin
 from django import views
-from django.urls import path,include
+from django.urls import path
 from custom_admin import views
 
 from django.contrib.auth.decorators import login_required

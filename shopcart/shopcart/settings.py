@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+from pathlib import Path
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# TEMPLATES_DIR=os.path.join(BASE_DIR,"custom_admin","templates")
+# USER_DIR=os.path.join(BASE_DIR,"M_Shopify","templates")
+BASE_DIR=Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'custom_admin',
+    'M_Shopify',
+   
     
 ]
 AUTH_USER_MODEL = "custom_admin.CustomUser" 
@@ -59,7 +64,7 @@ ROOT_URLCONF = 'shopcart.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"custom_admin","templates")],
+        'DIRS': [BASE_DIR,"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +136,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIR =[
+    BASE_DIR ,"static"
+]
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL="/media/"
@@ -138,7 +147,6 @@ MEDIA_URL="/media/"
 LOGIN_REDIRECT_URL = '/login'
 LOGIN_URL='/logout'
  
-STATICFILES_DIR =[
-    BASE_DIR ,"static"
-     ]
+
 # AUTH_USER_MODEL = 'custom_admin.User'
+ 
