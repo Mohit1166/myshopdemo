@@ -1,17 +1,20 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from custom_admin.models import CustomUser
 from django.core.exceptions import ValidationError
+User = get_user_model()
+
   
 
 
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField( min_length=5, max_length=150)  
     email = forms.EmailField()  
-    mobile=forms.IntegerField()
+    mobile=forms.CharField(max_length=13)
     password = forms.CharField( widget=forms.PasswordInput())  
     confirmpassword = forms.CharField(widget=forms.PasswordInput())
     class Meta():
-        model = User
+        model = CustomUser
         fields = ('username','email','mobile','password','confirmpassword')
 
 
@@ -43,9 +46,9 @@ class UserRegisterForm(forms.ModelForm):
     def save(self,commit=True):  
         user = User.objects.create_user(  
             self.cleaned_data['username'],
-            self.cleaned_data['email'], 
-            self.cleaned_data['mobile'], 
-            self.cleaned_data['password']  
+            email= self.cleaned_data['email'], 
+            mobile=self.cleaned_data['mobile'], 
+            password=self.cleaned_data['password']  
         )  
         return user 
 

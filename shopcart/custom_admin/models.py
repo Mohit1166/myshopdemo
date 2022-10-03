@@ -11,7 +11,7 @@ from django.contrib.auth.models import Group
 
 
 class CustomUser(AbstractUser):
-    pass
+    mobile=models.CharField(max_length=13,null = True)
     def __str__(self):
         return self.username
 

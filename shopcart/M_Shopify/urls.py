@@ -5,7 +5,7 @@ app_name = 'M_Shopify'
 
 urlpatterns =[
     path('',views.main,name="index"),
-    path("mylogin/",views.registration),
+    path("mylogin/",views.registration.as_view() ,name="mylogin"),
 ]
 
 
