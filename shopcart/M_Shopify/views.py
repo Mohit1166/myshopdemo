@@ -2,24 +2,16 @@ from django.shortcuts import render
 from .forms import UserRegisterForm
 from django.views import View
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate 
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib import messages
+
+
 
 # Create your views here.
 
 def main(request):
     return render(request,"myuser.html")
-
-# def registration(request):
-#     if request.method== "POST":
-#         form=UserRegisterForm(data=request.POST)
-#         if form.is_valid():
-#             user=form.save()
-#             user.set_password(user.password)
-#             user.save()
-#         else:
-#             print(form.errors)
-#     else:
-#         form=UserRegisterForm()
-#     return render (request,"forlogin/mylogin.html",{"form":form})
 
 class registration(View):
     def get(self,request): 
@@ -34,4 +26,25 @@ class registration(View):
             print(obj.errors)
             return render (request,"forlogin/mylogin.html",{"form":obj})
 
+
+
+def login_request(request):
+    breakpoint()
+
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
+                return redirect('M_Shopify:index')
+            else:
+                messages.error(request,"Invalid username or password.")
+        else:
+            messages.error(request,"Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request,"forlogin/mylogin.html", {"form":form})
 

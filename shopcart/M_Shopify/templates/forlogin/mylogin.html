@@ -9,13 +9,12 @@
 				<div class="login-form">
 					<!--login form-->
 					<h2>Login to your account</h2>
-					<form action="#">
-						<input type="text" placeholder="Name" />
-						<input type="email" placeholder="Email Address" />
-						<span>
-							<input type="checkbox" class="checkbox">
-							Keep me signed in
-						</span>
+					<form action="{% url 'M_Shopify:userlogin' %}" method="post">
+					{% csrf_token %}
+						<label for="username">username</label>
+						{{ form.username }}
+						<label for="password">password</label>
+						{{ form.password }}
 						<button type="submit" class="btn btn-default">Login</button>
 					</form>
 				</div>
@@ -29,7 +28,7 @@
 					<!--sign up form-->
 					<h2>New User Signup!</h2>
 					<form action="#" method="post">
-						{% csrf_token %}
+					{% csrf_token %}
 						<label for="username">UserName</label>
 						{{ form.username }}
 						<label for="email">Email</label>
@@ -42,14 +41,14 @@
 						{{ form.confirmpassword }}
 
 						{% if form.errors %}
-						  {% for field in form %}
-						    {% for error in field.errors %}
-						      <div class="alert alert-danger">
-							    <strong>{{ error|escape }}</strong>
+						{% for field in form %}
+						{% for error in field.errors %}
+						<div class="alert alert-danger">
+							<strong>{{ error|escape }}</strong>
 						</div>
 						{% endfor %}
-					{% endfor %}
-				{% endif %}
+						{% endfor %}
+						{% endif %}
 						<button type="submit" class="btn btn-default">Signup</button>
 					</form>
 				</div>
