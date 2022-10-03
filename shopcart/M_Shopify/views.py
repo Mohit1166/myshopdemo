@@ -29,8 +29,6 @@ class registration(View):
 
 
 def login_request(request):
-    breakpoint()
-
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -48,3 +46,5 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request,"forlogin/mylogin.html", {"form":form})
 
+def home_page(request):
+    return render(request,"home/home.html")
