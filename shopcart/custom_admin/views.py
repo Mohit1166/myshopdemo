@@ -92,7 +92,7 @@ def check(request):
 #       return render(request,"banners.html",{'object':check})
 
 
-@login_required(login_url='/adminpanel/adminlogin', redirect_field_name='adminlogin')
+@login_required(login_url='/adminpanel/adminlogin',redirect_field_name='adminlogin')
 def bannerscheck(request):
     obj = Banners.objects.all()
     keys = {"obj": obj}
