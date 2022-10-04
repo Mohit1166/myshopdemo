@@ -236,13 +236,27 @@
 									<img src="{{i.productsimages_set.first.image.url}}" alt="" />
 									<p>{{i.name}}</p>
 									<p>{{ i.price }}</p>
-									<a href="#" class="btn btn-default add-to-cart"><i
-											class="fa fa-shopping-cart"></i>Add to cart</a>
+									<!-- <a href="#" class="btn btn-default add-to-cart"> -->
+
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value=0
+											autocomplete="off" size="17">
+										<a class="cart_quantity_down" href=""> - </a>
+										<input type="hidden" class="product_id" value="{{i.id}}">
+										<button class="btn btn-primary btn-sm" type="button" id="button-add"><i
+												class="fa fa-shopping-cart">
+												Add to Cart
+											</i></button>
+
+									</div>
+
+
 								</div>
 							</div>
 						</div>
 					</div>
-				   {% endfor %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>

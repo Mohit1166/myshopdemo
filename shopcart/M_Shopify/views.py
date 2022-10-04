@@ -57,3 +57,6 @@ def home_page(request):
 def user_logout(request):
     logout(request)
     return redirect('M_Shopify:mylogin')
+
+def add_cart(request):
+    return render(request,'add_to_cart/cart.html')
