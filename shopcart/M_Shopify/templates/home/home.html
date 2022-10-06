@@ -227,7 +227,7 @@
 			</div>
 
 			<div class="col-sm-9 padding-right">
-				<div class="features_items">
+				<div class="features_items product_data">
 					<!--features_items-->
 					<h2 class="title text-center">Featured Items</h2>
 					{% for i in obj %}
@@ -238,20 +238,22 @@
 									<img src="{{i.productsimages_set.first.image.url}}" alt="" />
 									<p>{{i.name}}</p>
 									<p>{{ i.price }}</p>
+									<input type="hidden" class="image" value="{{i.productsimages_set.first.image}}">
 									<input type="hidden" class="product_id" value="{{i.id}}">
 									<input type="hidden" class="meta_title" value="{{i.meta_title}}">
 
-									<a href="#" class="btn btn-default add-to-cart" id="addtocart"><i
+									<a href="#" class="btn btn-primary addtocart"><i
 											class="fa fa-shopping-cart"></i>Add to cart</a>
 
 									<div class="row no-gutters">
 										<button class="minus" type="submit" value=" - " style="width: 20px; height: 30px;"  > -
 										</button>
-										<!-- <span class="num" id="productQty">1</span> -->
-										<input class="cart_quantity_input" type="text" name="quantity" value=0
-											autocomplete="off" size="19" id="productQty">
+										<span class="num">1</span>
+										<input class="cart_quantity_input" type="text" name="quantity" value=""
+											autocomplete="off" size="10" id="productQty" style="position: relative; left: 40px;" >
 										<button  class="plus" type="submit" value=" +" style="width: 20px; height: 30px;" > +
 										</button>
+								
 
 
 									</div>
@@ -274,10 +276,13 @@
 
 </script>
 <script>
-	$(document).on('click', "#addtocart", function () {
+	$(document).on('click', ".addtocart", function () {
+	
 		var _vm = $(this);
+		
 		var _qty = $("#productQty").val();
 		var _productid = $(".product_id").val();
+		var _productimage= $(".image").val();
 		var _title = $(".meta_title").val();
 		console.log(_qty, _productid, _title);
 
@@ -285,6 +290,7 @@
 			url: '/mycart',
 			data: {
 				'id': _productid,
+				'img':_productimage,
 				'qty': _qty,
 				'title': _title
 			},
@@ -301,7 +307,7 @@
 
 </script>
 
-<!-- <script>
+<script>
 	const plus =document.querySelector(".plus"),
 	minus=document.querySelector(".minus"),
 	num= document.querySelector(".num");
@@ -311,11 +317,13 @@
 		a++;
 		num.innerText=a ;
 		console.log(a);
+		document.getElementById("productQty").value=a;
 	});
 	minus.addEventListener("click",()=>{
 		if (a>1){
 			a--;
 			num.innerText=a;
+			document.getElementById("productQty").value=a;
 		}
 	})
-</script> -->
+</script>
