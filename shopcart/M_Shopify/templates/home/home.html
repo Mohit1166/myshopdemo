@@ -244,12 +244,16 @@
 									<a href="#" class="btn btn-default add-to-cart" id="addtocart"><i
 											class="fa fa-shopping-cart"></i>Add to cart</a>
 
-									<div class="cart_quantity_button">
-										<a class="cart_quantity_up" href=""> + </a>
+									<div class="row no-gutters">
+										<button class="minus" type="submit" value=" - " style="width: 20px; height: 30px;"  > -
+										</button>
+										<!-- <span class="num" id="productQty">1</span> -->
 										<input class="cart_quantity_input" type="text" name="quantity" value=0
-											autocomplete="off" size="17" id="productQty">
-										<a class="cart_quantity_down" href=""> - </a>
-						
+											autocomplete="off" size="19" id="productQty">
+										<button  class="plus" type="submit" value=" +" style="width: 20px; height: 30px;" > +
+										</button>
+
+
 									</div>
 								</div>
 							</div>
@@ -270,29 +274,48 @@
 
 </script>
 <script>
-	$(document).on('click',"#addtocart",function(){
-		var _vm=$(this);
+	$(document).on('click', "#addtocart", function () {
+		var _vm = $(this);
 		var _qty = $("#productQty").val();
-		var _productid =$(".product_id").val();
-		var _title =$(".meta_title").val();
-		console.log(_qty, _productid,_title);
+		var _productid = $(".product_id").val();
+		var _title = $(".meta_title").val();
+		console.log(_qty, _productid, _title);
 
 		$.ajax({
-			url:'/mycart',
-			data:{
-				'id':_productid,
-				'qty':_qty,
-				'title':_title
+			url: '/mycart',
+			data: {
+				'id': _productid,
+				'qty': _qty,
+				'title': _title
 			},
-			dataType:'json',
-			beforeSend:function(){
-				_vm.attr('disabled',true);
+			dataType: 'json',
+			beforeSend: function () {
+				_vm.attr('disabled', true);
 			},
-			success:function(res){
+			success: function (res) {
 				$(".cart-list").text(res.totalitems);
-				_vm.attr('disabled',false);
+				_vm.attr('disabled', false);
 			}
 		});
 	});
 
 </script>
+
+<!-- <script>
+	const plus =document.querySelector(".plus"),
+	minus=document.querySelector(".minus"),
+	num= document.querySelector(".num");
+
+	let a=1;
+	plus.addEventListener("click",()=>{
+		a++;
+		num.innerText=a ;
+		console.log(a);
+	});
+	minus.addEventListener("click",()=>{
+		if (a>1){
+			a--;
+			num.innerText=a;
+		}
+	})
+</script> -->

@@ -62,7 +62,7 @@ def user_logout(request):
 
 
 def add_cart(request):
-    cart_product = {}
+    cart_product={}
     cart_product[str(request.GET['id'])] = {
         'title': request.GET['title'],
         'qty': request.GET['qty'],
@@ -70,15 +70,19 @@ def add_cart(request):
     if 'cartdata' in request.session:
         if str(request.GET['id']) in request.session['cartdata']:
             cart_data = request.session['cartdata']
-            cart_data[str(request.GET['id'])]['qty'] = int(
-                cart_product[str(request.GET['id'])]['qty'])
+            cart_data[str(request.GET['id'])]['qty'] = int(cart_product[str(request.GET['id'])]['qty'])
             cart_data.update(cart_data)
-            request.session['cartdata'] = cart_data
+            request.session['cartdata']=cart_data
+            print(cart_data)
 
         else:
-            cart_data = request.session['cartdata']
+            cart_data=request.session['cartdata']
             cart_data.update(cart_product)
             request.session['cartdata']=cart_data
     else:
-        request.session[cart_data]=cart_product
+        request.session['cartdata']=cart_product
     return JsonResponse({'data': request.session['cartdata'],'totalitems': len(request.session['cartdata'])})
+
+
+
+
